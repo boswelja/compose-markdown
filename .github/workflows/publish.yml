@@ -46,7 +46,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
       - name: Build
-        run: ./gradlew publishAllPublicationsToOssRepository --scan
+        run: ./gradlew publishAllPublicationsToOssRepository --scan -Dorg.gradle.parallel=false
         env:
           PUBLISHING: true
           ORG_GRADLE_PROJECT_githubUsername: boswelja
