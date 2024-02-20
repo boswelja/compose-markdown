@@ -18,7 +18,7 @@ group = findProperty("group")!!
 version = findProperty("version")!!
 
 android {
-    namespace = "com.boswelja.markdown"
+    namespace = "com.boswelja.markdown.material3"
 
     buildTypes {
         release {
@@ -54,19 +54,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(libs.intellij.markdown)
-                implementation(libs.coil.compose)
-                implementation(libs.coil.svg)
-                implementation(libs.coil.gif)
-            }
-        }
-        commonTest {
-            dependencies {
-                // Since MenuItems require icons, we need to import some to test with
-                implementation(compose.materialIconsExtended)
-                implementation(libs.kotlin.test)
+                implementation(project(":core"))
+                implementation(compose.material3)
             }
         }
     }
