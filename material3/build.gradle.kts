@@ -54,7 +54,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":core"))
+                api(project(":core"))
                 implementation(compose.material3)
             }
         }
