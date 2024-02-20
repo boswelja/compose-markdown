@@ -70,11 +70,17 @@ public fun m3TextStyleModifiers(
 public fun m3BlockQuoteStyle(
     background: Color = MaterialTheme.colorScheme.surfaceVariant,
     shape: Shape = MaterialTheme.shapes.medium,
+    barWidth: Dp = 4.dp,
+    barColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    barShape: Shape = RectangleShape,
     innerPadding: PaddingValues = PaddingValues(8.dp)
 ): BlockQuoteStyle {
     return BlockQuoteStyle(
         background = background,
         shape = shape,
+        barWidth = barWidth,
+        barColor = barColor,
+        barShape = barShape,
         innerPadding = innerPadding
     )
 }
@@ -95,6 +101,9 @@ public fun m3CodeBlockStyle(
     )
 }
 
+/**
+ * Constructs a [RuleStyle] using recommended defaults for your Material 3 theme.
+ */
 @Composable
 public fun m3RuleStyle(
     color: Color = MaterialTheme.colorScheme.outlineVariant,
