@@ -1,4 +1,4 @@
-package com.nasdroid.core.markdown.components
+package com.boswelja.markdown.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,14 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.nasdroid.core.markdown.MarkdownNode
-import com.nasdroid.core.markdown.generator.MarkdownOrderedList
-import com.nasdroid.core.markdown.generator.MarkdownUnorderedList
-import com.nasdroid.core.markdown.style.BlockQuoteStyle
-import com.nasdroid.core.markdown.style.CodeBlockStyle
-import com.nasdroid.core.markdown.style.RuleStyle
-import com.nasdroid.core.markdown.style.TextStyleModifiers
-import com.nasdroid.core.markdown.style.TextStyles
+import com.boswelja.markdown.MarkdownNode
+import com.boswelja.markdown.generator.MarkdownOrderedList
+import com.boswelja.markdown.generator.MarkdownUnorderedList
+import com.boswelja.markdown.style.BlockQuoteStyle
+import com.boswelja.markdown.style.CodeBlockStyle
+import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TextStyleModifiers
+import com.boswelja.markdown.style.TextStyles
 
 private const val ORDERED_LIST_PREFIX_LENGTH = 3
 

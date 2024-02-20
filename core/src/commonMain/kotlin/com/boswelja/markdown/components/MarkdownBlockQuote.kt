@@ -1,4 +1,4 @@
-package com.nasdroid.core.markdown.components
+package com.boswelja.markdown.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -7,14 +7,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.nasdroid.core.markdown.MarkdownNode
-import com.nasdroid.core.markdown.generator.MarkdownBlockQuote
-import com.nasdroid.core.markdown.style.BlockQuoteStyle
-import com.nasdroid.core.markdown.style.CodeBlockStyle
-import com.nasdroid.core.markdown.style.RuleStyle
-import com.nasdroid.core.markdown.style.TextStyleModifiers
-import com.nasdroid.core.markdown.style.TextStyles
-import com.nasdroid.core.markdown.toDp
+import com.boswelja.markdown.MarkdownNode
+import com.boswelja.markdown.generator.MarkdownBlockQuote
+import com.boswelja.markdown.style.BlockQuoteStyle
+import com.boswelja.markdown.style.CodeBlockStyle
+import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TextStyleModifiers
+import com.boswelja.markdown.style.TextStyles
+import com.boswelja.markdown.toDp
 
 /**
  * Displays a [MarkdownBlockQuote]. A block quote is a visually distinct section in a document,

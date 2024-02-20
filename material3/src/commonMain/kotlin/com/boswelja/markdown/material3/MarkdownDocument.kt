@@ -5,11 +5,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
-import com.nasdroid.core.markdown.style.BlockQuoteStyle
-import com.nasdroid.core.markdown.style.CodeBlockStyle
-import com.nasdroid.core.markdown.style.RuleStyle
-import com.nasdroid.core.markdown.style.TextStyleModifiers
-import com.nasdroid.core.markdown.style.TextStyles
+import com.boswelja.markdown.style.BlockQuoteStyle
+import com.boswelja.markdown.style.CodeBlockStyle
+import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TextStyleModifiers
+import com.boswelja.markdown.style.TextStyles
 
 /**
  * Displays a Markdown document with Material 3 styling.
@@ -25,7 +25,7 @@ public fun MarkdownDocument(
     modifier: Modifier = Modifier,
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
 ) {
-    com.nasdroid.core.markdown.MarkdownDocument(
+    com.boswelja.markdown.MarkdownDocument(
         markdown = markdown,
         textStyles = textStyles,
         textStyleModifiers = textStyleModifiers,

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Divider
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ShapeDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -17,11 +16,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.nasdroid.core.markdown.style.BlockQuoteStyle
-import com.nasdroid.core.markdown.style.CodeBlockStyle
-import com.nasdroid.core.markdown.style.RuleStyle
-import com.nasdroid.core.markdown.style.TextStyleModifiers
-import com.nasdroid.core.markdown.style.TextStyles
+import com.boswelja.markdown.style.BlockQuoteStyle
+import com.boswelja.markdown.style.CodeBlockStyle
+import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TextStyleModifiers
+import com.boswelja.markdown.style.TextStyles
 
 /**
  * Constructs a [TextStyles] using recommended defaults from your Material 3 theme.

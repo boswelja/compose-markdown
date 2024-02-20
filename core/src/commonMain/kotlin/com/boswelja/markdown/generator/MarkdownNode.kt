@@ -1,4 +1,4 @@
-package com.nasdroid.core.markdown.generator
+package com.boswelja.markdown.generator
 
 /**
  * Encapsulates all possible content types within a Markdown document.

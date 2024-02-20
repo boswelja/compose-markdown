@@ -1,4 +1,4 @@
-package com.nasdroid.core.markdown.components
+package com.boswelja.markdown.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.InlineTextContent
@@ -18,15 +18,15 @@ import coil.compose.AsyncImage
 import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
-import com.nasdroid.core.markdown.generator.MarkdownCodeSpan
-import com.nasdroid.core.markdown.generator.MarkdownEol
-import com.nasdroid.core.markdown.generator.MarkdownImage
-import com.nasdroid.core.markdown.generator.MarkdownLink
-import com.nasdroid.core.markdown.generator.MarkdownSpanNode
-import com.nasdroid.core.markdown.generator.MarkdownText
-import com.nasdroid.core.markdown.generator.MarkdownWhitespace
-import com.nasdroid.core.markdown.style.TextStyleModifiers
-import com.nasdroid.core.markdown.style.TextUnitSize
+import com.boswelja.markdown.generator.MarkdownCodeSpan
+import com.boswelja.markdown.generator.MarkdownEol
+import com.boswelja.markdown.generator.MarkdownImage
+import com.boswelja.markdown.generator.MarkdownLink
+import com.boswelja.markdown.generator.MarkdownSpanNode
+import com.boswelja.markdown.generator.MarkdownText
+import com.boswelja.markdown.generator.MarkdownWhitespace
+import com.boswelja.markdown.style.TextStyleModifiers
+import com.boswelja.markdown.style.TextUnitSize
 
 /**
  * Maps a list of [MarkdownSpanNode]s to a [TextWithContent] for use in a Text Composable.

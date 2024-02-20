@@ -1,4 +1,4 @@
-package com.nasdroid.core.markdown.style
+package com.boswelja.markdown.style
 
 import androidx.compose.ui.unit.TextUnit
 

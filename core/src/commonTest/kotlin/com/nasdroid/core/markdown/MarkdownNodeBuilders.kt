@@ -1,19 +1,19 @@
 package com.nasdroid.core.markdown
 
-import com.nasdroid.core.markdown.generator.MarkdownBlockQuote
-import com.nasdroid.core.markdown.generator.MarkdownCodeBlock
-import com.nasdroid.core.markdown.generator.MarkdownCodeSpan
-import com.nasdroid.core.markdown.generator.MarkdownHeading
-import com.nasdroid.core.markdown.generator.MarkdownImage
-import com.nasdroid.core.markdown.generator.MarkdownLink
-import com.nasdroid.core.markdown.generator.MarkdownListItem
-import com.nasdroid.core.markdown.generator.MarkdownNode
-import com.nasdroid.core.markdown.generator.MarkdownOrderedList
-import com.nasdroid.core.markdown.generator.MarkdownParagraph
-import com.nasdroid.core.markdown.generator.MarkdownSpanNode
-import com.nasdroid.core.markdown.generator.MarkdownTable
-import com.nasdroid.core.markdown.generator.MarkdownText
-import com.nasdroid.core.markdown.generator.MarkdownUnorderedList
+import com.boswelja.markdown.generator.MarkdownBlockQuote
+import com.boswelja.markdown.generator.MarkdownCodeBlock
+import com.boswelja.markdown.generator.MarkdownCodeSpan
+import com.boswelja.markdown.generator.MarkdownHeading
+import com.boswelja.markdown.generator.MarkdownImage
+import com.boswelja.markdown.generator.MarkdownLink
+import com.boswelja.markdown.generator.MarkdownListItem
+import com.boswelja.markdown.generator.MarkdownNode
+import com.boswelja.markdown.generator.MarkdownOrderedList
+import com.boswelja.markdown.generator.MarkdownParagraph
+import com.boswelja.markdown.generator.MarkdownSpanNode
+import com.boswelja.markdown.generator.MarkdownTable
+import com.boswelja.markdown.generator.MarkdownText
+import com.boswelja.markdown.generator.MarkdownUnorderedList
 
 internal object MarkdownNodeBuilders {
     fun markdownUnorderedList(vararg listItems: MarkdownListItem): MarkdownUnorderedList {

@@ -1,4 +1,4 @@
-package com.nasdroid.core.markdown.components
+package com.boswelja.markdown.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -7,8 +7,8 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import com.nasdroid.core.markdown.generator.MarkdownCodeBlock
-import com.nasdroid.core.markdown.style.CodeBlockStyle
+import com.boswelja.markdown.generator.MarkdownCodeBlock
+import com.boswelja.markdown.style.CodeBlockStyle
 
 /**
  * Displays a [MarkdownCodeBlock]. A code block is a visually distinct section of text, usually used
