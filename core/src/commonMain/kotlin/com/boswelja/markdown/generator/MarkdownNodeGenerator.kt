@@ -1,4 +1,4 @@
-package com.nasdroid.core.markdown.generator
+package com.boswelja.markdown.generator
 
 import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.MarkdownTokenTypes

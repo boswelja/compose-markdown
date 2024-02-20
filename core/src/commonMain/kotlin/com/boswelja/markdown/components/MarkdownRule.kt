@@ -1,4 +1,4 @@
-package com.nasdroid.core.markdown.components
+package com.boswelja.markdown.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.nasdroid.core.markdown.style.RuleStyle
+import com.boswelja.markdown.style.RuleStyle
 
 /**
  * Displays a Markdown Rule. A rule is a horizontal line, usually used to separate content.

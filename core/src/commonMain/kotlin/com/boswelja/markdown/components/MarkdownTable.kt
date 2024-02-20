@@ -1,13 +1,13 @@
-package com.nasdroid.core.markdown.components
+package com.boswelja.markdown.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import com.nasdroid.core.markdown.generator.MarkdownTable
-import com.nasdroid.core.markdown.style.RuleStyle
-import com.nasdroid.core.markdown.style.TextStyleModifiers
+import com.boswelja.markdown.generator.MarkdownTable
+import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TextStyleModifiers
 
 /**
  * Displays a [MarkdownTable]. A table is a grid of labelled rows and columns that contain

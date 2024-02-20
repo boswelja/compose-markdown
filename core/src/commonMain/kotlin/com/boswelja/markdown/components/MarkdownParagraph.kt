@@ -1,4 +1,4 @@
-package com.nasdroid.core.markdown.components
+package com.boswelja.markdown.components
 
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
@@ -6,9 +6,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
-import com.nasdroid.core.markdown.generator.MarkdownParagraph
-import com.nasdroid.core.markdown.style.TextStyleModifiers
-import com.nasdroid.core.markdown.style.TextUnitSize
+import com.boswelja.markdown.generator.MarkdownParagraph
+import com.boswelja.markdown.style.TextStyleModifiers
+import com.boswelja.markdown.style.TextUnitSize
 
 /**
  * Displays a [MarkdownParagraph]. A paragraph is a group of "spans". Spans are stylized sections of

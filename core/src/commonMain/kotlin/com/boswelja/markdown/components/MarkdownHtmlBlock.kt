@@ -1,10 +1,10 @@
-package com.nasdroid.core.markdown.components
+package com.boswelja.markdown.components
 
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import com.nasdroid.core.markdown.generator.MarkdownHtmlBlock
+import com.boswelja.markdown.generator.MarkdownHtmlBlock
 
 /**
  * Displays a [MarkdownHtmlBlock]. An HTML block is a block of text that is formatted with HTML.

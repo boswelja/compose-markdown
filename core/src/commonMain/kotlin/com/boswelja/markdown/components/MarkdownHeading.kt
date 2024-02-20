@@ -1,14 +1,14 @@
-package com.nasdroid.core.markdown.components
+package com.boswelja.markdown.components
 
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
-import com.nasdroid.core.markdown.generator.MarkdownHeading
-import com.nasdroid.core.markdown.style.TextStyleModifiers
-import com.nasdroid.core.markdown.style.TextStyles
-import com.nasdroid.core.markdown.style.TextUnitSize
+import com.boswelja.markdown.generator.MarkdownHeading
+import com.boswelja.markdown.style.TextStyleModifiers
+import com.boswelja.markdown.style.TextStyles
+import com.boswelja.markdown.style.TextUnitSize
 
 /**
  * Displays a [MarkdownHeading]. A heading is a higher emphasis paragraph, usually used to separate
