@@ -9,10 +9,10 @@ dependencies {
     val markdownVersion = "1.0.0"
     
     // Core provides a generic implementation fit for any design system
-    implementation("io.github.boswelja.markdown:core:$menuproviderVersion")
+    implementation("io.github.boswelja.markdown:core:$markdownVersion")
     
     // material3 contains opinionated components to streamline development
-    implementation("io.github.boswelja.markdown:material3:$menuproviderVersion")
+    implementation("io.github.boswelja.markdown:material3:$markdownVersion")
 }
 ```
 
