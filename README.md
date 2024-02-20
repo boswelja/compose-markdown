@@ -4,7 +4,17 @@ A fully native Compose Markdown renderer!
 
 ## Setup
 
-Coming soon™️
+```kt
+dependencies {
+    val markdownVersion = "1.0.0"
+    
+    // Core provides a generic implementation fit for any design system
+    implementation("io.github.boswelja.markdown:core:$menuproviderVersion")
+    
+    // material3 contains opinionated components to streamline development
+    implementation("io.github.boswelja.markdown:material3:$menuproviderVersion")
+}
+```
 
 ## Usage
 
