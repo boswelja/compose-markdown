@@ -6,7 +6,7 @@ A fully native Compose Markdown renderer!
 
 ```kt
 dependencies {
-    val markdownVersion = "1.0.0"
+    val markdownVersion = "1.0.1"
     
     // Core provides a generic implementation fit for any design system
     implementation("io.github.boswelja.markdown:core:$markdownVersion")
