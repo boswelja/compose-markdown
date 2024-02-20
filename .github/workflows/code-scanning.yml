@@ -1,0 +1,52 @@
+name: Code scanning
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '33 19 * * *'
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3.9.0
+        with:
+          java-version: 17
+          distribution: temurin
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2.7.0
+      - name: Run Detekt & Lint
+        continue-on-error: true
+        run: ./gradlew detektMetadataMain lint --continue
+      - name: Upload SARIF binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: sarif-reports
+          path: '**/*.sarif'
+
+  upload-results:
+    needs: static-analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    strategy:
+      matrix:
+        path:
+          - core
+          - material3
+    steps:
+      - name: Download scan results
+        uses: actions/download-artifact@v3
+        with:
+          name: sarif-reports
+      - uses: github/codeql-action/upload-sarif@v2
+        continue-on-error: true
+        with:
+          sarif_file: ${{ matrix.path }}/
+          category: ${{ matrix.path }}
