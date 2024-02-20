@@ -88,7 +88,7 @@ signing {
 publishing {
     repositories {
         if (System.getenv("PUBLISHING") == "true") {
-            maven("https://maven.pkg.github.com/boswelja/Compose-MenuProvider") {
+            maven("https://maven.pkg.github.com/boswelja/compose-markdown") {
                 val githubUsername: String? by project.properties
                 val githubToken: String? by project.properties
                 name = "github"
