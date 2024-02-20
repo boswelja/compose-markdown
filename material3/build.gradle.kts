@@ -100,7 +100,7 @@ publishing {
 
     publications.withType<MavenPublication> {
         pom {
-            name = "core"
+            name = "material3"
             description = " A native Compose Markdown renderer"
             url = "https://github.com/boswelja/compose-markdown"
             licenses {
