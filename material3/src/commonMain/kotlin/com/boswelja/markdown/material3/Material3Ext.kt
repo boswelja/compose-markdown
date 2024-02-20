@@ -2,19 +2,24 @@
 package com.boswelja.markdown.material3
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.Divider
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.nasdroid.core.markdown.style.BlockQuoteStyle
 import com.nasdroid.core.markdown.style.CodeBlockStyle
+import com.nasdroid.core.markdown.style.RuleStyle
 import com.nasdroid.core.markdown.style.TextStyleModifiers
 import com.nasdroid.core.markdown.style.TextStyles
 
@@ -88,5 +93,19 @@ public fun m3CodeBlockStyle(
         background = background,
         shape = shape,
         innerPadding = innerPadding
+    )
+}
+
+@Composable
+public fun m3RuleStyle(
+    color: Color = MaterialTheme.colorScheme.outlineVariant,
+    shape: Shape = RectangleShape,
+    thickness: Dp = Dp.Hairline
+): RuleStyle {
+    Divider()
+    return RuleStyle(
+        color = color,
+        shape = shape,
+        thickness = thickness
     )
 }

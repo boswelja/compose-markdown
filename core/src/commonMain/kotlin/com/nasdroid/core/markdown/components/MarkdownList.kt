@@ -13,6 +13,7 @@ import com.nasdroid.core.markdown.generator.MarkdownOrderedList
 import com.nasdroid.core.markdown.generator.MarkdownUnorderedList
 import com.nasdroid.core.markdown.style.BlockQuoteStyle
 import com.nasdroid.core.markdown.style.CodeBlockStyle
+import com.nasdroid.core.markdown.style.RuleStyle
 import com.nasdroid.core.markdown.style.TextStyleModifiers
 import com.nasdroid.core.markdown.style.TextStyles
 
@@ -29,6 +30,7 @@ internal fun MarkdownOrderedList(
     textStyleModifiers: TextStyleModifiers,
     blockQuoteStyle: BlockQuoteStyle,
     codeBlockStyle: CodeBlockStyle,
+    ruleStyle: RuleStyle,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
@@ -48,7 +50,8 @@ internal fun MarkdownOrderedList(
                             textStyles = textStyles,
                             textStyleModifiers = textStyleModifiers,
                             blockQuoteStyle = blockQuoteStyle,
-                            codeBlockStyle = codeBlockStyle
+                            codeBlockStyle = codeBlockStyle,
+                            ruleStyle = ruleStyle,
                         )
                     }
                 }
@@ -68,6 +71,7 @@ internal fun MarkdownUnorderedList(
     textStyleModifiers: TextStyleModifiers,
     blockQuoteStyle: BlockQuoteStyle,
     codeBlockStyle: CodeBlockStyle,
+    ruleStyle: RuleStyle,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
@@ -86,7 +90,8 @@ internal fun MarkdownUnorderedList(
                             textStyles = textStyles,
                             textStyleModifiers = textStyleModifiers,
                             blockQuoteStyle = blockQuoteStyle,
-                            codeBlockStyle = codeBlockStyle
+                            codeBlockStyle = codeBlockStyle,
+                            ruleStyle = ruleStyle,
                         )
                     }
                 }

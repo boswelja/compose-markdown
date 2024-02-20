@@ -11,6 +11,7 @@ import com.nasdroid.core.markdown.MarkdownNode
 import com.nasdroid.core.markdown.generator.MarkdownBlockQuote
 import com.nasdroid.core.markdown.style.BlockQuoteStyle
 import com.nasdroid.core.markdown.style.CodeBlockStyle
+import com.nasdroid.core.markdown.style.RuleStyle
 import com.nasdroid.core.markdown.style.TextStyleModifiers
 import com.nasdroid.core.markdown.style.TextStyles
 import com.nasdroid.core.markdown.toDp
@@ -26,6 +27,7 @@ internal fun MarkdownBlockQuote(
     textStyles: TextStyles,
     textStyleModifiers: TextStyleModifiers,
     codeBlockStyle: CodeBlockStyle,
+    ruleStyle: RuleStyle,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -43,7 +45,8 @@ internal fun MarkdownBlockQuote(
                     textStyles = textStyles,
                     textStyleModifiers = textStyleModifiers,
                     blockQuoteStyle = style,
-                    codeBlockStyle = codeBlockStyle
+                    codeBlockStyle = codeBlockStyle,
+                    ruleStyle = ruleStyle
                 )
             }
         }

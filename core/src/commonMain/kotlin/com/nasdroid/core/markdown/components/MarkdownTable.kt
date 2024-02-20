@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import com.nasdroid.core.markdown.generator.MarkdownTable
+import com.nasdroid.core.markdown.style.RuleStyle
 import com.nasdroid.core.markdown.style.TextStyleModifiers
 
 /**
@@ -17,6 +18,7 @@ internal fun MarkdownTable(
     table: MarkdownTable,
     textStyle: TextStyle,
     textStyleModifiers: TextStyleModifiers,
+    ruleStyle: RuleStyle,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
@@ -31,7 +33,7 @@ internal fun MarkdownTable(
                 )
             }
         }
-        MarkdownRule()
+        MarkdownRule(ruleStyle)
         table.columns.first().cells.forEachIndexed { index, _ ->
             Row {
                 table.columns.forEach {
@@ -44,7 +46,7 @@ internal fun MarkdownTable(
                 }
             }
             if (index < table.columns.first().cells.lastIndex) {
-                MarkdownRule()
+                MarkdownRule(ruleStyle)
             }
         }
     }

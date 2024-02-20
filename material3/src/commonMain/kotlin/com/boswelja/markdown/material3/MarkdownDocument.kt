@@ -7,6 +7,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import com.nasdroid.core.markdown.style.BlockQuoteStyle
 import com.nasdroid.core.markdown.style.CodeBlockStyle
+import com.nasdroid.core.markdown.style.RuleStyle
 import com.nasdroid.core.markdown.style.TextStyleModifiers
 import com.nasdroid.core.markdown.style.TextStyles
 
@@ -20,6 +21,7 @@ public fun MarkdownDocument(
     textStyleModifiers: TextStyleModifiers = m3TextStyleModifiers(),
     blockQuoteStyle: BlockQuoteStyle = m3BlockQuoteStyle(),
     codeBlockStyle: CodeBlockStyle = m3CodeBlockStyle(),
+    ruleStyle: RuleStyle = m3RuleStyle(),
     modifier: Modifier = Modifier,
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
 ) {
@@ -29,6 +31,7 @@ public fun MarkdownDocument(
         textStyleModifiers = textStyleModifiers,
         blockQuoteStyle = blockQuoteStyle,
         codeBlockStyle = codeBlockStyle,
+        ruleStyle = ruleStyle,
         modifier = modifier,
         sectionSpacing = sectionSpacing
     )

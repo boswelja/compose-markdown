@@ -31,6 +31,7 @@ import com.nasdroid.core.markdown.generator.MarkdownTable
 import com.nasdroid.core.markdown.generator.MarkdownUnorderedList
 import com.nasdroid.core.markdown.style.BlockQuoteStyle
 import com.nasdroid.core.markdown.style.CodeBlockStyle
+import com.nasdroid.core.markdown.style.RuleStyle
 import com.nasdroid.core.markdown.style.TextStyleModifiers
 import com.nasdroid.core.markdown.style.TextStyles
 import org.intellij.markdown.flavours.gfm.GFMFlavourDescriptor
@@ -46,6 +47,7 @@ public fun MarkdownDocument(
     textStyleModifiers: TextStyleModifiers,
     blockQuoteStyle: BlockQuoteStyle,
     codeBlockStyle: CodeBlockStyle,
+    ruleStyle: RuleStyle,
     modifier: Modifier = Modifier,
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
 ) {
@@ -64,7 +66,8 @@ public fun MarkdownDocument(
                 textStyles = textStyles,
                 textStyleModifiers = textStyleModifiers,
                 blockQuoteStyle = blockQuoteStyle,
-                codeBlockStyle = codeBlockStyle
+                codeBlockStyle = codeBlockStyle,
+                ruleStyle = ruleStyle
             )
         }
     }
@@ -84,6 +87,7 @@ internal fun MarkdownNode(
     textStyleModifiers: TextStyleModifiers,
     blockQuoteStyle: BlockQuoteStyle,
     codeBlockStyle: CodeBlockStyle,
+    ruleStyle: RuleStyle,
     modifier: Modifier = Modifier
 ) {
     when (node) {
@@ -93,6 +97,7 @@ internal fun MarkdownNode(
             textStyles = textStyles,
             textStyleModifiers = textStyleModifiers,
             codeBlockStyle = codeBlockStyle,
+            ruleStyle = ruleStyle,
             modifier = modifier,
         )
         is MarkdownCodeBlock -> MarkdownCodeBlock(
@@ -113,6 +118,7 @@ internal fun MarkdownNode(
             textStyleModifiers = textStyleModifiers,
             blockQuoteStyle = blockQuoteStyle,
             codeBlockStyle = codeBlockStyle,
+            ruleStyle = ruleStyle,
             modifier = modifier
         )
         is MarkdownParagraph -> MarkdownParagraph(
@@ -121,11 +127,15 @@ internal fun MarkdownNode(
             textStyleModifiers = textStyleModifiers,
             modifier = modifier
         )
-        MarkdownRule -> MarkdownRule(modifier = modifier)
+        MarkdownRule -> MarkdownRule(
+            ruleStyle = ruleStyle,
+            modifier = modifier
+        )
         is MarkdownTable -> MarkdownTable(
             table = node,
             textStyle = textStyles.textStyle,
             textStyleModifiers = textStyleModifiers,
+            ruleStyle = ruleStyle,
             modifier = modifier
         )
         is MarkdownHtmlBlock -> MarkdownHtmlBlock(
@@ -139,6 +149,7 @@ internal fun MarkdownNode(
             textStyleModifiers = textStyleModifiers,
             blockQuoteStyle = blockQuoteStyle,
             codeBlockStyle = codeBlockStyle,
+            ruleStyle = ruleStyle,
             modifier = modifier
         )
     }

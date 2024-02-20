@@ -15,7 +15,7 @@ import com.nasdroid.core.markdown.generator.MarkdownTable
 import com.nasdroid.core.markdown.generator.MarkdownText
 import com.nasdroid.core.markdown.generator.MarkdownUnorderedList
 
-object MarkdownNodeBuilders {
+internal object MarkdownNodeBuilders {
     fun markdownUnorderedList(vararg listItems: MarkdownListItem): MarkdownUnorderedList {
         return MarkdownUnorderedList(listItems.toList())
     }
