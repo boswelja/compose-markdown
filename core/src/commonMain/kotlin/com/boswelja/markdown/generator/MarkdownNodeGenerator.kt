@@ -140,6 +140,10 @@ internal class MarkdownNodeGenerator(
             MarkdownTokenTypes.SINGLE_QUOTE,
             MarkdownTokenTypes.DOUBLE_QUOTE,
             MarkdownTokenTypes.EXCLAMATION_MARK,
+            MarkdownTokenTypes.LPAREN,
+            MarkdownTokenTypes.RPAREN,
+            MarkdownTokenTypes.LT,
+            MarkdownTokenTypes.GT,
             MarkdownElementTypes.EMPH -> parseTextNode(astNode)
             MarkdownTokenTypes.WHITE_SPACE -> MarkdownWhitespace
             MarkdownTokenTypes.EOL -> MarkdownEol
@@ -233,6 +237,10 @@ internal class MarkdownNodeGenerator(
             MarkdownTokenTypes.SINGLE_QUOTE,
             MarkdownTokenTypes.DOUBLE_QUOTE,
             MarkdownTokenTypes.EXCLAMATION_MARK,
+            MarkdownTokenTypes.LPAREN,
+            MarkdownTokenTypes.RPAREN,
+            MarkdownTokenTypes.LT,
+            MarkdownTokenTypes.GT,
             MarkdownTokenTypes.TEXT -> MarkdownText(
                 text = astNode.getTextInNode(allFileText).trim().toString(),
                 isBold = false,
