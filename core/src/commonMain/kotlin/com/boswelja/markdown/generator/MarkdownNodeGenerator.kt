@@ -1,5 +1,6 @@
 package com.boswelja.markdown.generator
 
+import org.intellij.markdown.MarkdownElementType
 import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.MarkdownTokenTypes
 import org.intellij.markdown.ast.ASTNode
@@ -134,16 +135,6 @@ internal class MarkdownNodeGenerator(
             MarkdownTokenTypes.ATX_CONTENT,
             MarkdownTokenTypes.HTML_TAG,
             MarkdownTokenTypes.HTML_BLOCK_CONTENT,
-            MarkdownTokenTypes.COLON,
-            MarkdownTokenTypes.LBRACKET,
-            MarkdownTokenTypes.RBRACKET,
-            MarkdownTokenTypes.SINGLE_QUOTE,
-            MarkdownTokenTypes.DOUBLE_QUOTE,
-            MarkdownTokenTypes.EXCLAMATION_MARK,
-            MarkdownTokenTypes.LPAREN,
-            MarkdownTokenTypes.RPAREN,
-            MarkdownTokenTypes.LT,
-            MarkdownTokenTypes.GT,
             MarkdownElementTypes.EMPH -> parseTextNode(astNode)
             MarkdownTokenTypes.WHITE_SPACE -> MarkdownWhitespace
             MarkdownTokenTypes.EOL -> MarkdownEol
@@ -152,7 +143,13 @@ internal class MarkdownNodeGenerator(
             MarkdownElementTypes.AUTOLINK -> parseLinkNode(astNode)
             MarkdownElementTypes.IMAGE -> parseImageNode(astNode)
             MarkdownElementTypes.CODE_SPAN -> parseCodeSpan(astNode)
-            else -> error("Unsure how to handle type ${astNode.type} inside a PARAGRAPH")
+            else -> {
+                if ((astNode.type as? MarkdownElementType)?.isToken == true) {
+                    parseTextNode(astNode)
+                } else {
+                    error("Unsure how to handle type ${astNode.type} inside a PARAGRAPH")
+                }
+            }
         }
     }
     private fun parseCodeSpan(astNode: ASTNode): MarkdownCodeSpan {
@@ -227,26 +224,6 @@ internal class MarkdownNodeGenerator(
 
     private fun parseTextNode(astNode: ASTNode): MarkdownText {
         return when (astNode.type) {
-            MarkdownTokenTypes.SETEXT_CONTENT,
-            MarkdownTokenTypes.ATX_CONTENT,
-            MarkdownTokenTypes.HTML_TAG,
-            MarkdownTokenTypes.HTML_BLOCK_CONTENT,
-            MarkdownTokenTypes.COLON,
-            MarkdownTokenTypes.LBRACKET,
-            MarkdownTokenTypes.RBRACKET,
-            MarkdownTokenTypes.SINGLE_QUOTE,
-            MarkdownTokenTypes.DOUBLE_QUOTE,
-            MarkdownTokenTypes.EXCLAMATION_MARK,
-            MarkdownTokenTypes.LPAREN,
-            MarkdownTokenTypes.RPAREN,
-            MarkdownTokenTypes.LT,
-            MarkdownTokenTypes.GT,
-            MarkdownTokenTypes.TEXT -> MarkdownText(
-                text = astNode.getTextInNode(allFileText).trim().toString(),
-                isBold = false,
-                isItalics = false,
-                isStrikethrough = false
-            )
             MarkdownElementTypes.STRONG,
             GFMElementTypes.STRIKETHROUGH,
             MarkdownElementTypes.EMPH -> MarkdownText(
@@ -257,7 +234,12 @@ internal class MarkdownNodeGenerator(
                 isItalics = astNode.type == MarkdownElementTypes.EMPH,
                 isStrikethrough = astNode.type == GFMElementTypes.STRIKETHROUGH,
             )
-            else -> error("Unsure how to handle text type ${astNode.type} ")
+            else -> MarkdownText(
+                text = astNode.getTextInNode(allFileText).trim().toString(),
+                isBold = false,
+                isItalics = false,
+                isStrikethrough = false
+            )
         }
     }
 
