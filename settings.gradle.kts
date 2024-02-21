@@ -24,7 +24,8 @@ rootProject.name = "Compose Markdown"
 
 include(
     ":core",
-    ":material3"
+    ":material3",
+    ":sample"
 )
 
 gradleEnterprise {
