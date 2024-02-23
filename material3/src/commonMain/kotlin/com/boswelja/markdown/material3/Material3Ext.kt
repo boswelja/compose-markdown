@@ -2,7 +2,6 @@
 package com.boswelja.markdown.material3
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material3.Divider
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -19,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.boswelja.markdown.style.BlockQuoteStyle
 import com.boswelja.markdown.style.CodeBlockStyle
 import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TableStyle
 import com.boswelja.markdown.style.TextStyleModifiers
 import com.boswelja.markdown.style.TextStyles
 
@@ -110,10 +110,19 @@ public fun m3RuleStyle(
     shape: Shape = RectangleShape,
     thickness: Dp = Dp.Hairline
 ): RuleStyle {
-    Divider()
     return RuleStyle(
         color = color,
         shape = shape,
         thickness = thickness
     )
+}
+
+/**
+ * Constructs a [TableStyle] using recommended defaults for your Material 3 theme.
+ */
+@Composable
+public fun m3TableStyle(
+    cellPadding: PaddingValues = PaddingValues(8.dp)
+): TableStyle {
+    return TableStyle(cellPadding)
 }
