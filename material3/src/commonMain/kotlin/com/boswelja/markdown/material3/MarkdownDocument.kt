@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.TextUnit
 import com.boswelja.markdown.style.BlockQuoteStyle
 import com.boswelja.markdown.style.CodeBlockStyle
 import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TableStyle
 import com.boswelja.markdown.style.TextStyleModifiers
 import com.boswelja.markdown.style.TextStyles
 
@@ -17,12 +18,13 @@ import com.boswelja.markdown.style.TextStyles
 @Composable
 public fun MarkdownDocument(
     markdown: String,
+    modifier: Modifier = Modifier,
     textStyles: TextStyles = m3TextStyles(),
     textStyleModifiers: TextStyleModifiers = m3TextStyleModifiers(),
     blockQuoteStyle: BlockQuoteStyle = m3BlockQuoteStyle(),
     codeBlockStyle: CodeBlockStyle = m3CodeBlockStyle(),
     ruleStyle: RuleStyle = m3RuleStyle(),
-    modifier: Modifier = Modifier,
+    tableStyle: TableStyle = m3TableStyle(),
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
 ) {
     com.boswelja.markdown.MarkdownDocument(
@@ -32,6 +34,7 @@ public fun MarkdownDocument(
         blockQuoteStyle = blockQuoteStyle,
         codeBlockStyle = codeBlockStyle,
         ruleStyle = ruleStyle,
+        tableStyle = tableStyle,
         modifier = modifier,
         sectionSpacing = sectionSpacing
     )

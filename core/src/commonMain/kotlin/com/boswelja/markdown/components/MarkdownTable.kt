@@ -2,11 +2,13 @@ package com.boswelja.markdown.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import com.boswelja.markdown.generator.MarkdownTable
 import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TableStyle
 import com.boswelja.markdown.style.TextStyleModifiers
 
 /**
@@ -16,6 +18,7 @@ import com.boswelja.markdown.style.TextStyleModifiers
 @Composable
 internal fun MarkdownTable(
     table: MarkdownTable,
+    style: TableStyle,
     textStyle: TextStyle,
     textStyleModifiers: TextStyleModifiers,
     ruleStyle: RuleStyle,
@@ -29,7 +32,7 @@ internal fun MarkdownTable(
                     paragraph = it.header,
                     textStyle = textStyle,
                     textStyleModifiers = textStyleModifiers,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f).padding(style.cellPadding)
                 )
             }
         }
@@ -41,7 +44,7 @@ internal fun MarkdownTable(
                         paragraph = it.cells[index],
                         textStyle = textStyle,
                         textStyleModifiers = textStyleModifiers,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f).padding(style.cellPadding)
                     )
                 }
             }

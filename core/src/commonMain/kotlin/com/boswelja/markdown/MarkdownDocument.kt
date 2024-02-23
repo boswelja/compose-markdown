@@ -32,6 +32,7 @@ import com.boswelja.markdown.generator.MarkdownUnorderedList
 import com.boswelja.markdown.style.BlockQuoteStyle
 import com.boswelja.markdown.style.CodeBlockStyle
 import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TableStyle
 import com.boswelja.markdown.style.TextStyleModifiers
 import com.boswelja.markdown.style.TextStyles
 import org.intellij.markdown.flavours.gfm.GFMFlavourDescriptor
@@ -48,6 +49,7 @@ public fun MarkdownDocument(
     blockQuoteStyle: BlockQuoteStyle,
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
+    tableStyle: TableStyle,
     modifier: Modifier = Modifier,
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
 ) {
@@ -67,7 +69,8 @@ public fun MarkdownDocument(
                 textStyleModifiers = textStyleModifiers,
                 blockQuoteStyle = blockQuoteStyle,
                 codeBlockStyle = codeBlockStyle,
-                ruleStyle = ruleStyle
+                ruleStyle = ruleStyle,
+                tableStyle = tableStyle
             )
         }
     }
@@ -88,6 +91,7 @@ internal fun MarkdownNode(
     blockQuoteStyle: BlockQuoteStyle,
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
+    tableStyle: TableStyle,
     modifier: Modifier = Modifier
 ) {
     when (node) {
@@ -98,6 +102,7 @@ internal fun MarkdownNode(
             textStyleModifiers = textStyleModifiers,
             codeBlockStyle = codeBlockStyle,
             ruleStyle = ruleStyle,
+            tableStyle = tableStyle,
             modifier = modifier,
         )
         is MarkdownCodeBlock -> MarkdownCodeBlock(
@@ -119,6 +124,7 @@ internal fun MarkdownNode(
             blockQuoteStyle = blockQuoteStyle,
             codeBlockStyle = codeBlockStyle,
             ruleStyle = ruleStyle,
+            tableStyle = tableStyle,
             modifier = modifier
         )
         is MarkdownParagraph -> MarkdownParagraph(
@@ -133,6 +139,7 @@ internal fun MarkdownNode(
         )
         is MarkdownTable -> MarkdownTable(
             table = node,
+            style = tableStyle,
             textStyle = textStyles.textStyle,
             textStyleModifiers = textStyleModifiers,
             ruleStyle = ruleStyle,
@@ -150,6 +157,7 @@ internal fun MarkdownNode(
             blockQuoteStyle = blockQuoteStyle,
             codeBlockStyle = codeBlockStyle,
             ruleStyle = ruleStyle,
+            tableStyle = tableStyle,
             modifier = modifier
         )
     }

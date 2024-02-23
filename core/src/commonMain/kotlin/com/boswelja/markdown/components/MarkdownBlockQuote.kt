@@ -18,6 +18,7 @@ import com.boswelja.markdown.generator.MarkdownBlockQuote
 import com.boswelja.markdown.style.BlockQuoteStyle
 import com.boswelja.markdown.style.CodeBlockStyle
 import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TableStyle
 import com.boswelja.markdown.style.TextStyleModifiers
 import com.boswelja.markdown.style.TextStyles
 
@@ -33,6 +34,7 @@ internal fun MarkdownBlockQuote(
     textStyleModifiers: TextStyleModifiers,
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
+    tableStyle: TableStyle,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -63,6 +65,7 @@ internal fun MarkdownBlockQuote(
                         blockQuoteStyle = style,
                         codeBlockStyle = codeBlockStyle,
                         ruleStyle = ruleStyle,
+                        tableStyle = tableStyle
                     )
                 }
             }

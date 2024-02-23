@@ -14,6 +14,7 @@ import com.boswelja.markdown.generator.MarkdownUnorderedList
 import com.boswelja.markdown.style.BlockQuoteStyle
 import com.boswelja.markdown.style.CodeBlockStyle
 import com.boswelja.markdown.style.RuleStyle
+import com.boswelja.markdown.style.TableStyle
 import com.boswelja.markdown.style.TextStyleModifiers
 import com.boswelja.markdown.style.TextStyles
 
@@ -31,6 +32,7 @@ internal fun MarkdownOrderedList(
     blockQuoteStyle: BlockQuoteStyle,
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
+    tableStyle: TableStyle,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
@@ -52,6 +54,7 @@ internal fun MarkdownOrderedList(
                             blockQuoteStyle = blockQuoteStyle,
                             codeBlockStyle = codeBlockStyle,
                             ruleStyle = ruleStyle,
+                            tableStyle = tableStyle
                         )
                     }
                 }
@@ -72,6 +75,7 @@ internal fun MarkdownUnorderedList(
     blockQuoteStyle: BlockQuoteStyle,
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
+    tableStyle: TableStyle,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
@@ -92,6 +96,7 @@ internal fun MarkdownUnorderedList(
                             blockQuoteStyle = blockQuoteStyle,
                             codeBlockStyle = codeBlockStyle,
                             ruleStyle = ruleStyle,
+                            tableStyle = tableStyle
                         )
                     }
                 }
