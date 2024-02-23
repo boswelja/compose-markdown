@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.Placeholder
@@ -14,10 +13,11 @@ import androidx.compose.ui.text.UrlAnnotation
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withAnnotation
 import androidx.compose.ui.text.withStyle
-import coil.compose.AsyncImage
-import coil.decode.ImageDecoderDecoder
-import coil.decode.SvgDecoder
-import coil.request.ImageRequest
+import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.network.okhttp.OkHttpNetworkFetcherFactory
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.boswelja.markdown.generator.MarkdownCodeSpan
 import com.boswelja.markdown.generator.MarkdownEol
 import com.boswelja.markdown.generator.MarkdownImage
@@ -44,24 +44,12 @@ internal fun List<MarkdownSpanNode>.buildTextWithContent(
                     // TODO auto-size the content - https://issuetracker.google.com/issues/294110693
                     placeholder = Placeholder(imageSize.width, imageSize.height, PlaceholderVerticalAlign.TextBottom)
                 ) { contentDescription ->
-                    val request = when {
-                        node.imageUrl.endsWith("svg") -> ImageRequest.Builder(LocalContext.current)
-                            .data(node.imageUrl)
-                            .decoderFactory(SvgDecoder.Factory())
-                            .crossfade(true)
-                            .build()
-                        node.imageUrl.endsWith("gif") -> ImageRequest.Builder(LocalContext.current)
-                            .data(node.imageUrl)
-                            .decoderFactory(ImageDecoderDecoder.Factory())
-                            .crossfade(true)
-                            .build()
-                        else -> ImageRequest.Builder(LocalContext.current)
-                            .data(node.imageUrl)
-                            .crossfade(true)
-                            .build()
-                    }
                     AsyncImage(
-                        model = request,
+                        model = ImageRequest.Builder(LocalPlatformContext.current)
+                            .fetcherFactory(OkHttpNetworkFetcherFactory())
+                            .data(node.imageUrl)
+                            .crossfade(true)
+                            .build(),
                         contentDescription = contentDescription,
                         modifier = Modifier.fillMaxSize()
                     )

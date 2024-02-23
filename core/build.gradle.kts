@@ -60,6 +60,7 @@ kotlin {
                 implementation(libs.coil.compose)
                 implementation(libs.coil.svg)
                 implementation(libs.coil.gif)
+                implementation(libs.coil.network.okhttp)
             }
         }
         commonTest {
