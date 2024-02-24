@@ -4,6 +4,25 @@ A fully native Compose Markdown renderer!
 
 ## Setup
 
+### Version Catalogs
+
+```toml
+[versions]
+composeMarkdown = "1.0.1"
+
+[libraries]
+boswelja-compose-core = { group = "io.github.boswelja.markdown", name = "core", version.ref = "composeMarkdown" }
+boswelja-compose-markdown = { group = "io.github.boswelja.markdown", name = "material3", version.ref = "composeMarkdown" }
+```
+
+```kt
+dependencies {
+    implementation(libs.boswelja.compose.core)
+    implementation(libs.boswelja.compose.markdown)
+}
+```
+### String Notation
+
 ```kt
 dependencies {
     val markdownVersion = "1.0.1"
