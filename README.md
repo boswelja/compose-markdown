@@ -17,7 +17,6 @@ boswelja-compose-markdown = { group = "io.github.boswelja.markdown", name = "mat
 
 ```kt
 dependencies {
-    // Using version catalogs
     implementation(libs.boswelja.compose.core)
     implementation(libs.boswelja.compose.markdown)
 }
