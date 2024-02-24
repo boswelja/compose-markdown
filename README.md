@@ -20,8 +20,12 @@ dependencies {
     // Using version catalogs
     implementation(libs.boswelja.compose.core)
     implementation(libs.boswelja.compose.markdown)
+}
+```
+### String Notation
 
-    // Using string notation
+```kt
+dependencies {
     val markdownVersion = "1.0.1"
     
     // Core provides a generic implementation fit for any design system
