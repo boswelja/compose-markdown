@@ -77,11 +77,13 @@ internal class MarkdownNodeGenerator(
             .filter { it.type == GFMElementTypes.ROW }
         val columns = headers.mapIndexed { index: Int, headerNode: ASTNode ->
             val columnCellNodes = bodyNodes
-                .map { row -> row.children.filter { it.type == GFMTokenTypes.CELL }[index] }
+                .map { row -> row.children.filter { it.type == GFMTokenTypes.CELL }.getOrNull(index) }
             MarkdownTable.Column(
                 header = parseParagraphNode(headerNode),
                 alignment = MarkdownTable.Alignment.LEFT,
-                cells = columnCellNodes.map { parseParagraphNode(it) }
+                cells = columnCellNodes.map { node ->
+                    node?.let { parseParagraphNode(it) } ?: MarkdownParagraph(listOf(MarkdownWhitespace))
+                }
             )
         }
         return MarkdownTable(columns)
