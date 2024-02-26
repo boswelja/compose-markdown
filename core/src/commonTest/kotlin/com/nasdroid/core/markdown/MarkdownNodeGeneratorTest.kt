@@ -224,6 +224,31 @@ class MarkdownNodeGeneratorTest {
                     markdownParagraph(markdownText("baz")),
                     MarkdownTable.Alignment.CENTER,
                 )
+            ),
+            """
+                | foo | bar | baz |
+                | --- | --- | :--- |
+                | cell1 | cell2 |
+                | cell3 | cell4 | cell5 |
+            """.trimIndent() to markdownTable(
+                markdownTableColumn(
+                    markdownParagraph(markdownText("foo")),
+                    MarkdownTable.Alignment.LEFT,
+                    markdownParagraph(markdownText("cell1")),
+                    markdownParagraph(markdownText("cell3"))
+                ),
+                markdownTableColumn(
+                    markdownParagraph(markdownText("bar")),
+                    MarkdownTable.Alignment.RIGHT,
+                    markdownParagraph(markdownText("cell2")),
+                    markdownParagraph(markdownText("cell4"))
+                ),
+                markdownTableColumn(
+                    markdownParagraph(markdownText("baz")),
+                    MarkdownTable.Alignment.CENTER,
+                    markdownParagraph(MarkdownWhitespace),
+                    markdownParagraph(markdownText("cell5"))
+                )
             )
         )
 
