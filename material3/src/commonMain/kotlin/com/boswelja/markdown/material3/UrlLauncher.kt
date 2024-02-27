@@ -1,8 +1,6 @@
 package com.boswelja.markdown.material3
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 
 /**
  * A contract that allows launching a URL, ideally from a Compose side-effect. See [launchUrl] for
