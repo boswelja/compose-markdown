@@ -35,6 +35,7 @@ internal fun MarkdownBlockQuote(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
+    onLinkClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -65,7 +66,8 @@ internal fun MarkdownBlockQuote(
                         blockQuoteStyle = style,
                         codeBlockStyle = codeBlockStyle,
                         ruleStyle = ruleStyle,
-                        tableStyle = tableStyle
+                        tableStyle = tableStyle,
+                        onLinkClick = onLinkClick
                     )
                 }
             }
