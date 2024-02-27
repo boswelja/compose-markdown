@@ -154,6 +154,7 @@ internal class MarkdownNodeGenerator(
             }
         }
     }
+
     private fun parseCodeSpan(astNode: ASTNode): MarkdownCodeSpan {
         val text = astNode.children
             .filterNot { it.type == MarkdownTokenTypes.BACKTICK }

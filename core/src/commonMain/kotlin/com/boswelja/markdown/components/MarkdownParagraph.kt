@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextLayoutResult
@@ -14,6 +15,8 @@ import androidx.compose.ui.unit.sp
 import com.boswelja.markdown.generator.MarkdownParagraph
 import com.boswelja.markdown.style.TextStyleModifiers
 import com.boswelja.markdown.style.TextUnitSize
+
+internal const val URL_TAG = "URL"
 
 /**
  * Displays a [MarkdownParagraph]. A paragraph is a group of "spans". Spans are stylized sections of
