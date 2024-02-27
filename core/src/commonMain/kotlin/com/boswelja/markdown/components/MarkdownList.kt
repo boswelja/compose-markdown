@@ -33,6 +33,7 @@ internal fun MarkdownOrderedList(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
+    onLinkClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
@@ -54,7 +55,8 @@ internal fun MarkdownOrderedList(
                             blockQuoteStyle = blockQuoteStyle,
                             codeBlockStyle = codeBlockStyle,
                             ruleStyle = ruleStyle,
-                            tableStyle = tableStyle
+                            tableStyle = tableStyle,
+                            onLinkClick = onLinkClick
                         )
                     }
                 }
@@ -76,6 +78,7 @@ internal fun MarkdownUnorderedList(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
+    onLinkClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
@@ -96,7 +99,8 @@ internal fun MarkdownUnorderedList(
                             blockQuoteStyle = blockQuoteStyle,
                             codeBlockStyle = codeBlockStyle,
                             ruleStyle = ruleStyle,
-                            tableStyle = tableStyle
+                            tableStyle = tableStyle,
+                            onLinkClick = onLinkClick
                         )
                     }
                 }

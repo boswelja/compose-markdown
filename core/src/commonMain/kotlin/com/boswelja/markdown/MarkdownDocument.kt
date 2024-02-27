@@ -50,6 +50,7 @@ public fun MarkdownDocument(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
+    onLinkClick: (String) -> Unit,
     modifier: Modifier = Modifier,
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
 ) {
@@ -70,7 +71,8 @@ public fun MarkdownDocument(
                 blockQuoteStyle = blockQuoteStyle,
                 codeBlockStyle = codeBlockStyle,
                 ruleStyle = ruleStyle,
-                tableStyle = tableStyle
+                tableStyle = tableStyle,
+                onLinkClick = onLinkClick,
             )
         }
     }
@@ -92,6 +94,7 @@ internal fun MarkdownNode(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
+    onLinkClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     when (node) {
@@ -103,6 +106,7 @@ internal fun MarkdownNode(
             codeBlockStyle = codeBlockStyle,
             ruleStyle = ruleStyle,
             tableStyle = tableStyle,
+            onLinkClick = onLinkClick,
             modifier = modifier,
         )
         is MarkdownCodeBlock -> MarkdownCodeBlock(
@@ -125,12 +129,14 @@ internal fun MarkdownNode(
             codeBlockStyle = codeBlockStyle,
             ruleStyle = ruleStyle,
             tableStyle = tableStyle,
+            onLinkClick = onLinkClick,
             modifier = modifier
         )
         is MarkdownParagraph -> MarkdownParagraph(
             paragraph = node,
             textStyle = textStyles.textStyle,
             textStyleModifiers = textStyleModifiers,
+            onLinkClick = onLinkClick,
             modifier = modifier
         )
         MarkdownRule -> MarkdownRule(
@@ -143,6 +149,7 @@ internal fun MarkdownNode(
             textStyle = textStyles.textStyle,
             textStyleModifiers = textStyleModifiers,
             ruleStyle = ruleStyle,
+            onLinkClick = onLinkClick,
             modifier = modifier
         )
         is MarkdownHtmlBlock -> MarkdownHtmlBlock(
@@ -158,6 +165,7 @@ internal fun MarkdownNode(
             codeBlockStyle = codeBlockStyle,
             ruleStyle = ruleStyle,
             tableStyle = tableStyle,
+            onLinkClick = onLinkClick,
             modifier = modifier
         )
     }

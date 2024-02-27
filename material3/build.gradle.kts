@@ -58,6 +58,11 @@ kotlin {
                 implementation(compose.material3)
             }
         }
+        androidMain {
+            dependencies {
+                implementation(libs.androidx.browser)
+            }
+        }
     }
 }
 

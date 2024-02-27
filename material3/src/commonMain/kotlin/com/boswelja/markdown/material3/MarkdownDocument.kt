@@ -25,7 +25,8 @@ public fun MarkdownDocument(
     codeBlockStyle: CodeBlockStyle = m3CodeBlockStyle(),
     ruleStyle: RuleStyle = m3RuleStyle(),
     tableStyle: TableStyle = m3TableStyle(),
-    sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
+    sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp(),
+    urlLauncher: UrlLauncher = rememberUrlLauncher()
 ) {
     com.boswelja.markdown.MarkdownDocument(
         markdown = markdown,
@@ -35,6 +36,7 @@ public fun MarkdownDocument(
         codeBlockStyle = codeBlockStyle,
         ruleStyle = ruleStyle,
         tableStyle = tableStyle,
+        onLinkClick = { urlLauncher.launchUrl(it) },
         modifier = modifier,
         sectionSpacing = sectionSpacing
     )

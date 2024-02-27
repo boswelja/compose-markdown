@@ -22,6 +22,7 @@ internal fun MarkdownTable(
     textStyle: TextStyle,
     textStyleModifiers: TextStyleModifiers,
     ruleStyle: RuleStyle,
+    onLinkClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
@@ -32,6 +33,7 @@ internal fun MarkdownTable(
                     paragraph = it.header,
                     textStyle = textStyle,
                     textStyleModifiers = textStyleModifiers,
+                    onLinkClick = onLinkClick,
                     modifier = Modifier.weight(1f).padding(style.cellPadding)
                 )
             }
@@ -44,6 +46,7 @@ internal fun MarkdownTable(
                         paragraph = it.cells[index],
                         textStyle = textStyle,
                         textStyleModifiers = textStyleModifiers,
+                        onLinkClick = onLinkClick,
                         modifier = Modifier.weight(1f).padding(style.cellPadding)
                     )
                 }
