@@ -8,7 +8,7 @@ A fully native Compose Markdown renderer!
 
 ```toml
 [versions]
-composeMarkdown = "1.0.1"
+composeMarkdown = "1.0.4"
 
 [libraries]
 boswelja-compose-core = { group = "io.github.boswelja.markdown", name = "core", version.ref = "composeMarkdown" }
@@ -25,7 +25,7 @@ dependencies {
 
 ```kt
 dependencies {
-    val markdownVersion = "1.0.1"
+    val markdownVersion = "1.0.4"
     
     // Core provides a generic implementation fit for any design system
     implementation("io.github.boswelja.markdown:core:$markdownVersion")

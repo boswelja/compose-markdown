@@ -17,7 +17,7 @@ dependencyResolutionManagement {
 
 plugins {
     id("com.gradle.enterprise") version("3.16.1")
-    id("com.android.settings") version("8.2.0")
+    id("com.android.settings") version("8.2.2")
 }
 
 rootProject.name = "Compose Markdown"
