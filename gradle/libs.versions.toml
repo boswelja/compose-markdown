@@ -4,16 +4,13 @@ detekt = "1.23.5"
 kotlin = "1.9.22"
 dokka = "1.9.10"
 
-compose = "1.5.12"
+compose = "1.6.0"
 
 coil = "3.0.0-alpha04"
 
 intellij-markdown = "0.6.1"
 
-androidx-browser = "1.7.0"
-
 [libraries]
-androidx-browser = { group = "androidx.browser", name = "browser", version.ref = "androidx-browser" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-gif = { module = "io.coil-kt.coil3:coil-gif", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }
