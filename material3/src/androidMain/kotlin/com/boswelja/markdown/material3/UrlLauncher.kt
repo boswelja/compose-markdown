@@ -1,24 +1,20 @@
 package com.boswelja.markdown.material3
 
-import android.content.Context
-import android.net.Uri
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.UriHandler
 
 @Composable
 public actual fun rememberUrlLauncher(): UrlLauncher {
-    val context = LocalContext.current
-    return remember(context) {
-        DefaultUrlLauncher(context)
+    val uriHandler = LocalUriHandler.current
+    return remember(uriHandler) {
+        DefaultUrlLauncher(uriHandler)
     }
 }
 
-internal class DefaultUrlLauncher(private val context: Context) : UrlLauncher {
+internal class DefaultUrlLauncher(private val handler: UriHandler) : UrlLauncher {
     override fun launchUrl(url: String) {
-        val intent = CustomTabsIntent.Builder()
-            .build()
-        intent.launchUrl(context, Uri.parse(url))
+        handler.openUri(url)
     }
 }

@@ -55,16 +55,6 @@ internal fun List<MarkdownSpanNode>.buildTextWithContent(
                     )
                 }
             }
-
-            if (node is MarkdownLink) {
-                addStringAnnotation(
-                    tag = URL_TAG,
-                    annotation = node.url,
-                    start = length,
-                    end = length + node.displayText.joinToString("").length
-                )
-            }
-
             append(node.toAnnotatedString(textStyles,textStyleModifiers))
         }
     }
