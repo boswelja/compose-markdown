@@ -3,6 +3,7 @@ package com.boswelja.markdown.material3
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import com.boswelja.markdown.style.BlockQuoteStyle
@@ -26,8 +27,9 @@ public fun MarkdownDocument(
     ruleStyle: RuleStyle = m3RuleStyle(),
     tableStyle: TableStyle = m3TableStyle(),
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp(),
-    urlLauncher: UrlLauncher = rememberUrlLauncher()
+    onLinkClick: ((String) -> Unit)? = null
 ) {
+    val uriHandler = LocalUriHandler.current
     com.boswelja.markdown.MarkdownDocument(
         markdown = markdown,
         textStyles = textStyles,
@@ -36,7 +38,7 @@ public fun MarkdownDocument(
         codeBlockStyle = codeBlockStyle,
         ruleStyle = ruleStyle,
         tableStyle = tableStyle,
-        onLinkClick = { urlLauncher.launchUrl(it) },
+        onLinkClick = { onLinkClick?.invoke(it) ?: uriHandler.openUri(it) },
         modifier = modifier,
         sectionSpacing = sectionSpacing
     )
