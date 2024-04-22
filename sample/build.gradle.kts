@@ -24,7 +24,7 @@ kotlin {
 
 dependencies {
     implementation(project(":material3"))
-    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation("androidx.activity:activity-compose:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation(compose.material3)
 }
