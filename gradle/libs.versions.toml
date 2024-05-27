@@ -8,7 +8,7 @@ compose = "1.6.2"
 
 coil = "3.0.0-alpha06"
 
-intellij-markdown = "0.7.2"
+intellij-markdown = "0.7.3"
 
 [libraries]
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
