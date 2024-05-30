@@ -1,14 +1,14 @@
 [versions]
-android-gradle-plugin = "8.2.2"
-detekt = "1.23.5"
-kotlin = "1.9.22"
-dokka = "1.9.10"
+android-gradle-plugin = "8.4.1"
+detekt = "1.23.6"
+kotlin = "2.0.0"
+dokka = "1.9.20"
 
-compose = "1.6.0"
+compose = "1.6.10"
 
-coil = "3.0.0-alpha04"
+coil = "3.0.0-alpha06"
 
-intellij-markdown = "0.6.1"
+intellij-markdown = "0.7.3"
 
 [libraries]
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
@@ -25,4 +25,5 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
