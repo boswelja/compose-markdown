@@ -3,21 +3,33 @@ import com.android.build.api.dsl.SettingsExtension
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
     }
 }
 
 plugins {
-    id("com.gradle.enterprise") version("3.16.1")
-    id("com.android.settings") version("8.2.2")
+    id("com.gradle.enterprise") version("3.17.4")
+    id("com.android.settings") version("8.4.1")
 }
 
 rootProject.name = "Compose Markdown"
