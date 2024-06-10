@@ -4,7 +4,7 @@ detekt = "1.23.6"
 kotlin = "2.0.0"
 dokka = "1.9.20"
 
-compose = "1.6.10"
+compose = "1.6.11"
 
 coil = "3.0.0-alpha06"
 
