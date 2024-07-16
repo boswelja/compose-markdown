@@ -6,7 +6,7 @@ dokka = "1.9.20"
 
 compose = "1.6.11"
 
-coil = "3.0.0-alpha07"
+coil = "3.0.0-alpha08"
 
 intellij-markdown = "0.7.3"
 
