@@ -1,5 +1,4 @@
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
-import java.net.URL
+import java.net.URI
 
 plugins {
     alias(libs.plugins.android.library)
@@ -45,7 +44,7 @@ android {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
     explicitApi()
 
     androidTarget {
@@ -139,16 +138,12 @@ publishing {
     }
 }
 
-tasks.withType<DokkaTaskPartial>().configureEach {
+dokka {
     dokkaSourceSets.configureEach {
         includes.from("MODULE.md")
-        externalDocumentationLink(
-            url = "https://developer.android.com/reference/kotlin/",
-            packageListUrl = "https://developer.android.com/reference/kotlin/androidx/package-list"
-        )
         sourceLink {
             localDirectory.set(projectDir.resolve("src"))
-            remoteUrl.set(URL("https://github.com/boswelja/compose-markdown/tree/main/core/src"))
+            remoteUrl.set(URI("https://github.com/boswelja/compose-markdown/tree/main/core/src"))
             remoteLineSuffix.set("#L")
         }
     }

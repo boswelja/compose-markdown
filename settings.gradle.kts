@@ -28,8 +28,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("com.gradle.enterprise") version("3.17.4")
-    id("com.android.settings") version("8.4.1")
+    id("com.android.settings") version("8.7.2")
 }
 
 rootProject.name = "Compose Markdown"
@@ -40,17 +39,7 @@ include(
     ":sample"
 )
 
-gradleEnterprise {
-    buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        if (System.getenv("CI") == "true") {
-            termsOfServiceAgree = "yes"
-            isUploadInBackground = false
-        }
-    }
-}
-
-configure<SettingsExtension> {
+android {
     buildToolsVersion = "34.0.0"
     compileSdk = 34
     minSdk = 28
