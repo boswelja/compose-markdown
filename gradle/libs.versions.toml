@@ -1,10 +1,10 @@
 [versions]
-android-gradle-plugin = "8.4.1"
+android-gradle-plugin = "8.7.2"
 detekt = "1.23.7"
 kotlin = "2.0.21"
-dokka = "1.9.20"
+dokka = "2.0.0-Beta"
 
-compose = "1.7.0"
+compose = "1.7.1"
 
 coil = "3.0.2"
 
