@@ -9,6 +9,7 @@ import com.boswelja.markdown.generator.MarkdownRule
 import com.boswelja.markdown.generator.MarkdownSpanNode
 import com.boswelja.markdown.generator.MarkdownTable
 import com.boswelja.markdown.generator.MarkdownWhitespace
+import com.boswelja.markdown.generator.TestMarkdown
 import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownBlockQuote
 import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownCodeBlock
 import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownCodeSpan
@@ -472,5 +473,11 @@ class MarkdownNodeGeneratorTest {
         ORDERED_LIST_PATTERNS.forEach { (markdown, expected) ->
             testNodeParsing(markdown, expected)
         }
+    }
+
+    @Test
+    fun `parsing benchmark target succeeds`() {
+        val generator = MarkdownNodeGenerator(TestMarkdown, produceMarkdownAstNode(TestMarkdown))
+        generator.generateNodes()
     }
 }
