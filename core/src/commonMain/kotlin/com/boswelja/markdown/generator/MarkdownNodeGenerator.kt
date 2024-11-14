@@ -16,6 +16,8 @@ internal class MarkdownNodeGenerator(
     private val allFileText: String,
     private val rootNode: ASTNode
 ) {
+    private val referenceLinkDefinitions = mutableMapOf<String, ReferenceLinkDefinition>()
+
     init {
         check(rootNode.type == MarkdownElementTypes.MARKDOWN_FILE) {
             "The root node provided must be of type MARKDOWN_FILE, but it was ${rootNode.type}"
@@ -26,7 +28,65 @@ internal class MarkdownNodeGenerator(
      * Generates a list of [MarkdownNode]s from the data provided at construction time.
      */
     fun generateNodes(): List<MarkdownNode> {
-        return rootNode.children.mapNotNull { parseGenericNode(it) }
+        val nodes = rootNode.children.mapNotNull { parseGenericNode(it) }
+        // Retroactively go back and see if there's any reference links we need to complete
+        return updateReferenceLinks(nodes)
+    }
+
+    private fun updateReferenceLinks(nodes: List<MarkdownNode>): List<MarkdownNode> {
+        return nodes.map {
+            when (it) {
+                is MarkdownBlockQuote -> it.copy(children = updateReferenceLinks(it.children))
+                is MarkdownCodeBlock -> it
+                is MarkdownHeading -> it.copy(children = updateReferenceLinkSpans(it.children))
+                is MarkdownHtmlBlock -> it
+                is MarkdownOrderedList -> it.copy(
+                    listItems = it.listItems.map { MarkdownListItem(updateReferenceLinks(it.content)) }
+                )
+                is MarkdownParagraph -> it.copy(children = updateReferenceLinkSpans(it.children))
+                MarkdownRule -> it
+                is MarkdownTable -> it.copy(
+                    columns = it.columns.map {
+                        it.copy(
+                            header = it.header.copy(
+                                children = updateReferenceLinkSpans(it.header.children)
+                            ),
+                            cells = it.cells.map { cell ->
+                                cell.copy(
+                                    children = updateReferenceLinkSpans(cell.children)
+                                )
+                            }
+                        )
+                    }
+                )
+                is MarkdownUnorderedList -> it.copy(
+                    listItems = it.listItems.map { MarkdownListItem(updateReferenceLinks(it.content)) }
+                )
+            }
+        }
+    }
+
+    private fun updateReferenceLinkSpans(nodes: List<MarkdownSpanNode>): List<MarkdownSpanNode> {
+        return nodes.map {
+            when (it) {
+                is MarkdownCodeSpan -> it
+                MarkdownEol -> it
+                is MarkdownImage -> it
+                is MarkdownLink -> {
+                    if (referenceLinkDefinitions.contains(it.url)) {
+                        val definition = referenceLinkDefinitions[it.url]!!
+                        it.copy(
+                            url = definition.url,
+                            titleText = definition.title
+                        )
+                    } else {
+                        it
+                    }
+                }
+                is MarkdownText -> it
+                MarkdownWhitespace -> it
+            }
+        }
     }
 
     private fun parseGenericNode(astNode: ASTNode): MarkdownNode? {
@@ -50,6 +110,10 @@ internal class MarkdownNodeGenerator(
             MarkdownElementTypes.UNORDERED_LIST -> parseUnorderedList(astNode)
             MarkdownElementTypes.ORDERED_LIST -> parseOrderedList(astNode)
             MarkdownElementTypes.HTML_BLOCK -> MarkdownHtmlBlock(astNode.getTextInNode(allFileText).toString())
+            MarkdownElementTypes.LINK_DEFINITION -> {
+                parseLinkDefinition(astNode)
+                null
+            }
             else -> error("Unknown node type ${astNode.type}")
         }
     }
@@ -145,6 +209,8 @@ internal class MarkdownNodeGenerator(
             MarkdownElementTypes.AUTOLINK -> parseLinkNode(astNode)
             MarkdownElementTypes.IMAGE -> parseImageNode(astNode)
             MarkdownElementTypes.CODE_SPAN -> parseCodeSpan(astNode)
+            MarkdownElementTypes.FULL_REFERENCE_LINK,
+            MarkdownElementTypes.SHORT_REFERENCE_LINK -> parseReferenceLinkNode(astNode)
             else -> {
                 if ((astNode.type as? MarkdownElementType)?.isToken == true) {
                     parseTextNode(astNode)
@@ -246,6 +312,64 @@ internal class MarkdownNodeGenerator(
         }
     }
 
+    private fun parseReferenceLinkNode(astNode: ASTNode): MarkdownLink {
+        val text = astNode.children
+            .first { it.type == MarkdownElementTypes.LINK_TEXT }
+            .children
+            .filterNot { it.type == MarkdownTokenTypes.LBRACKET || it.type == MarkdownTokenTypes.RBRACKET }
+            .map { parseSpanNode(it) }
+        val label = astNode.children
+            .first { it.type == MarkdownElementTypes.LINK_LABEL }
+            .getTextInNode(allFileText)
+            .trimStart('[')
+            .trimEnd(']')
+        val definition = referenceLinkDefinitions[label]
+        return if (definition == null) {
+            // Placeholder link that needs to be substituted later
+            MarkdownLink(
+                displayText = text,
+                url = label.toString(),
+                titleText = null
+            )
+        } else {
+            MarkdownLink(
+                displayText = text,
+                url = definition.url,
+                titleText = definition.title
+            )
+        }
+    }
+
+    private fun parseLinkDefinition(astNode: ASTNode) {
+        val link = astNode.children
+            .first {
+                it.type == MarkdownElementTypes.LINK_DESTINATION
+            }
+            .getTextInNode(allFileText)
+            .trimStart('<', '\'', '"')
+            .trimEnd('>', '\'', '"')
+        val label = astNode.children
+            .first {
+                it.type == MarkdownElementTypes.LINK_LABEL
+            }
+            .getTextInNode(allFileText)
+            .trimStart('[')
+            .trimEnd(']')
+            .toString()
+        val titleText = astNode.children
+            .firstOrNull {
+                it.type == MarkdownElementTypes.LINK_TITLE
+            }
+            ?.getTextInNode(allFileText)
+            ?.trimStart('"', '\'', '(')
+            ?.trimEnd('"', '\'', ')')
+        referenceLinkDefinitions[label] =
+            ReferenceLinkDefinition(
+                url = link.toString(),
+                title = titleText?.toString()
+            )
+    }
+
     private fun parseLinkNode(astNode: ASTNode): MarkdownLink {
         return when (astNode.type) {
             MarkdownElementTypes.AUTOLINK -> {
@@ -306,3 +430,8 @@ internal class MarkdownNodeGenerator(
         }
     }
 }
+
+internal data class ReferenceLinkDefinition(
+    val url: String,
+    val title: String? = null
+)
