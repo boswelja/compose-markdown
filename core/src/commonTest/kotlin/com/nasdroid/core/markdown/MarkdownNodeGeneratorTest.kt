@@ -1,18 +1,5 @@
 package com.nasdroid.core.markdown
 
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownBlockQuote
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownCodeBlock
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownCodeSpan
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownHeader
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownImage
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownOrderedList
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownParagraph
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownTable
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownTableColumn
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownText
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownUnorderedList
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownLink
-import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownListItem
 import com.boswelja.markdown.generator.MarkdownEol
 import com.boswelja.markdown.generator.MarkdownHeading
 import com.boswelja.markdown.generator.MarkdownNode
@@ -22,6 +9,19 @@ import com.boswelja.markdown.generator.MarkdownRule
 import com.boswelja.markdown.generator.MarkdownSpanNode
 import com.boswelja.markdown.generator.MarkdownTable
 import com.boswelja.markdown.generator.MarkdownWhitespace
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownBlockQuote
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownCodeBlock
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownCodeSpan
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownHeader
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownImage
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownLink
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownListItem
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownOrderedList
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownParagraph
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownTable
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownTableColumn
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownText
+import com.nasdroid.core.markdown.MarkdownNodeBuilders.markdownUnorderedList
 import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.flavours.gfm.GFMFlavourDescriptor
 import org.intellij.markdown.parser.MarkdownParser
@@ -162,6 +162,14 @@ class MarkdownNodeGeneratorTest {
                 text = listOf(markdownText("Google")),
                 altText = "Google"
             ),
+        )
+
+        private val REFERENCE_LINK_PATTERNS = mapOf(
+            "[hobbit-hole][1]\n\n[1]: https://en.wikipedia.org/wiki/Hobbit#Lifestyle" to markdownLink("https://en.wikipedia.org/wiki/Hobbit#Lifestyle", listOf(markdownText("hobbit-hole"))),
+            "[1]: <https://en.wikipedia.org/wiki/Hobbit#Lifestyle>\n\n[hobbit-hole] [1]" to markdownLink("https://en.wikipedia.org/wiki/Hobbit#Lifestyle", listOf(markdownText("hobbit-hole"))),
+            "[hobbit-hole][label]\n\n[label]: https://en.wikipedia.org/wiki/Hobbit#Lifestyle \"Hobbit lifestyles\"" to markdownLink("https://en.wikipedia.org/wiki/Hobbit#Lifestyle", listOf(markdownText("hobbit-hole")), "Hobbit lifestyles"),
+            "[hobbit-hole][label]\n\n[label]: https://en.wikipedia.org/wiki/Hobbit#Lifestyle 'Hobbit lifestyles'" to markdownLink("https://en.wikipedia.org/wiki/Hobbit#Lifestyle", listOf(markdownText("hobbit-hole")), "Hobbit lifestyles"),
+            "[hobbit-hole][label]\n\n[label]: https://en.wikipedia.org/wiki/Hobbit#Lifestyle (Hobbit lifestyles)" to markdownLink("https://en.wikipedia.org/wiki/Hobbit#Lifestyle", listOf(markdownText("hobbit-hole")), "Hobbit lifestyles"),
         )
 
         private val PLAINTEXT_PATTERNS = mapOf(
@@ -384,6 +392,13 @@ class MarkdownNodeGeneratorTest {
     @Test
     fun `link parsing`() {
         LINK_PATTERNS.forEach { (markdown, expected) ->
+            testSpanParsing(markdown, expected)
+        }
+    }
+
+    @Test
+    fun `reference link parsing`() {
+        REFERENCE_LINK_PATTERNS.forEach { (markdown, expected) ->
             testSpanParsing(markdown, expected)
         }
     }
