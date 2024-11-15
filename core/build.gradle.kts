@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
 
+    alias(libs.plugins.kotlinx.benchmark)
+
     alias(libs.plugins.detekt)
 
     alias(libs.plugins.dokka)
@@ -47,6 +49,12 @@ kotlin {
     jvmToolchain(21)
     explicitApi()
 
+    jvm {
+        compilations.create("benchmark") {
+            associateWith(this@jvm.compilations.getByName("main"))
+        }
+    }
+
     androidTarget {
         publishLibraryVariants("release")
     }
@@ -70,6 +78,17 @@ kotlin {
                 implementation(libs.kotlin.test)
             }
         }
+        getByName("jvmBenchmark") {
+            dependencies {
+                implementation(libs.kotlinx.benchmark)
+            }
+        }
+    }
+}
+
+benchmark {
+    targets {
+        register("jvmBenchmark")
     }
 }
 
