@@ -10,7 +10,7 @@ coil = "3.0.3"
 
 intellij-markdown = "0.7.3"
 
-kotlinx-benchmark = "0.4.12"
+kotlinx-benchmark = "0.4.13"
 
 [libraries]
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
