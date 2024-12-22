@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
@@ -19,13 +19,12 @@ import com.boswelja.markdown.style.TextUnitSize
  * Displays a [MarkdownParagraph]. A paragraph is a group of "spans". Spans are stylized sections of
  * text, but can also include inline images and links.
  */
-@OptIn(ExperimentalTextApi::class)
 @Composable
 internal fun MarkdownParagraph(
     paragraph: MarkdownParagraph,
     textStyle: TextStyle,
     textStyleModifiers: TextStyleModifiers,
-    onLinkClick: (String) -> Unit,
+    onLinkClick: (LinkAnnotation) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val (annotatedString, inlineContent) = remember(paragraph) {
@@ -36,9 +35,11 @@ internal fun MarkdownParagraph(
         detectTapGestures { pos ->
             layoutResult.value?.let { layoutResult ->
                 val offset = layoutResult.getOffsetForPosition(pos)
-                annotatedString.getUrlAnnotations(start = offset, end = offset).firstOrNull()?.let { annotation ->
-                    onLinkClick(annotation.item.url)
-                }
+                annotatedString.getLinkAnnotations(start = offset, end = offset)
+                    .firstOrNull()
+                    ?.let { annotation ->
+                        annotation.item.linkInteractionListener?.onClick(annotation.item)
+                    }
             }
         }
     }

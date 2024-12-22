@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -50,7 +51,7 @@ public fun MarkdownDocument(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
-    onLinkClick: (String) -> Unit,
+    onLinkClick: (LinkAnnotation) -> Unit,
     modifier: Modifier = Modifier,
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
 ) {
@@ -94,7 +95,7 @@ internal fun MarkdownNode(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
-    onLinkClick: (String) -> Unit,
+    onLinkClick: (LinkAnnotation) -> Unit,
     modifier: Modifier = Modifier
 ) {
     when (node) {

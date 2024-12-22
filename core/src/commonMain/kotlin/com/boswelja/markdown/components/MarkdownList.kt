@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.unit.dp
 import com.boswelja.markdown.MarkdownNode
 import com.boswelja.markdown.generator.MarkdownOrderedList
@@ -33,7 +34,7 @@ internal fun MarkdownOrderedList(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
-    onLinkClick: (String) -> Unit,
+    onLinkClick: (LinkAnnotation) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
@@ -78,7 +79,7 @@ internal fun MarkdownUnorderedList(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
-    onLinkClick: (String) -> Unit,
+    onLinkClick: (LinkAnnotation) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
