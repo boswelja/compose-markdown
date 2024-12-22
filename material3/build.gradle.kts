@@ -37,7 +37,6 @@ android {
 
     publishing {
         singleVariant("release") {
-            withJavadocJar()
             withSourcesJar()
         }
     }
@@ -47,9 +46,21 @@ kotlin {
     jvmToolchain(21)
     explicitApi()
 
+    withSourcesJar(publish = true)
+
+    // JVM targets
+    jvm()
+
+    // Android targets
     androidTarget {
         publishLibraryVariants("release")
     }
+
+    // Apple targets
+    iosArm64()
+
+    // Web targets
+    wasmJs()
 
     sourceSets {
         commonMain {
@@ -72,6 +83,10 @@ signing {
     val signingPassword: String? by project
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
+}
+
+val javadocJar by tasks.registering(Jar::class) {
+    archiveClassifier = "javadoc"
 }
 
 publishing {
@@ -99,6 +114,7 @@ publishing {
     }
 
     publications.withType<MavenPublication> {
+        artifact(javadocJar)
         pom {
             name = "material3"
             description = " A native Compose Markdown renderer"

@@ -14,7 +14,7 @@ import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
-import coil3.network.okhttp.OkHttpNetworkFetcherFactory
+import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.boswelja.markdown.generator.MarkdownCodeSpan
@@ -45,7 +45,7 @@ internal fun List<MarkdownSpanNode>.buildTextWithContent(
                 ) { contentDescription ->
                     AsyncImage(
                         model = ImageRequest.Builder(LocalPlatformContext.current)
-                            .fetcherFactory(OkHttpNetworkFetcherFactory())
+                            .fetcherFactory(KtorNetworkFetcherFactory())
                             .data(node.imageUrl)
                             .crossfade(true)
                             .build(),
