@@ -37,7 +37,6 @@ android {
 
     publishing {
         singleVariant("release") {
-            withJavadocJar()
             withSourcesJar()
         }
     }
@@ -86,6 +85,10 @@ signing {
     sign(publishing.publications)
 }
 
+val javadocJar by tasks.registering(Jar::class) {
+    archiveClassifier = "javadoc"
+}
+
 publishing {
     repositories {
         if (System.getenv("PUBLISHING") == "true") {
@@ -111,6 +114,7 @@ publishing {
     }
 
     publications.withType<MavenPublication> {
+        artifact(javadocJar)
         pom {
             name = "material3"
             description = " A native Compose Markdown renderer"
