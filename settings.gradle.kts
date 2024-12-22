@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.SettingsExtension
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -28,7 +26,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("com.android.settings") version("8.7.2")
+    id("com.android.settings") version("8.7.3")
 }
 
 rootProject.name = "Compose Markdown"
@@ -40,7 +38,7 @@ include(
 )
 
 android {
-    buildToolsVersion = "34.0.0"
-    compileSdk = 34
+    buildToolsVersion = "35.0.0"
+    compileSdk = 35
     minSdk = 28
 }

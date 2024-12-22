@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import com.boswelja.markdown.style.BlockQuoteStyle
@@ -27,7 +28,7 @@ public fun MarkdownDocument(
     ruleStyle: RuleStyle = m3RuleStyle(),
     tableStyle: TableStyle = m3TableStyle(),
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp(),
-    onLinkClick: ((String) -> Unit)? = null
+    onLinkClick: ((LinkAnnotation) -> Unit)? = null
 ) {
     val uriHandler = LocalUriHandler.current
     com.boswelja.markdown.MarkdownDocument(
@@ -38,7 +39,15 @@ public fun MarkdownDocument(
         codeBlockStyle = codeBlockStyle,
         ruleStyle = ruleStyle,
         tableStyle = tableStyle,
-        onLinkClick = { onLinkClick?.invoke(it) ?: uriHandler.openUri(it) },
+        onLinkClick = {
+            if (onLinkClick != null) {
+                onLinkClick(it)
+            } else if (it is LinkAnnotation.Url) {
+                uriHandler.openUri(it.url)
+            } else {
+                // The link wasn't a URL, and a handler wasn't provided.
+            }
+        },
         modifier = modifier,
         sectionSpacing = sectionSpacing
     )

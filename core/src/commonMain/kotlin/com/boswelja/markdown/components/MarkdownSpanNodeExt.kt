@@ -5,13 +5,12 @@ import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.UrlAnnotation
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withAnnotation
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
@@ -73,7 +72,6 @@ internal data class TextWithContent(
     val content: Map<String, InlineTextContent>
 )
 
-@OptIn(ExperimentalTextApi::class)
 internal fun MarkdownSpanNode.toAnnotatedString(
     textStyle: TextStyle,
     textStyleModifiers: TextStyleModifiers,
@@ -87,7 +85,7 @@ internal fun MarkdownSpanNode.toAnnotatedString(
             appendInlineContent(imageUrl, contentDescription)
         }
         is MarkdownLink -> buildAnnotatedString {
-            withAnnotation(UrlAnnotation(url)) {
+            withLink(LinkAnnotation.Url(url)) {
                 withStyle(textStyleModifiers.link(textStyle).toSpanStyle()) {
                     displayText.forEach {
                         append(it.toAnnotatedString(textStyle, textStyleModifiers))
