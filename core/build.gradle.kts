@@ -49,15 +49,25 @@ kotlin {
     jvmToolchain(21)
     explicitApi()
 
+    withSourcesJar(publish = true)
+
+    // JVM targets
     jvm {
         compilations.create("benchmark") {
             associateWith(this@jvm.compilations.getByName("main"))
         }
     }
 
+    // Android targets
     androidTarget {
         publishLibraryVariants("release")
     }
+
+    // Apple targets
+    iosArm64()
+
+    // Web targets
+    wasmJs()
 
     sourceSets {
         commonMain {
@@ -68,7 +78,7 @@ kotlin {
                 implementation(libs.coil.compose)
                 implementation(libs.coil.svg)
                 implementation(libs.coil.gif)
-                implementation(libs.coil.network.okhttp)
+                implementation(libs.coil.network.ktor)
             }
         }
         commonTest {
@@ -76,6 +86,21 @@ kotlin {
                 // Since MenuItems require icons, we need to import some to test with
                 implementation(compose.materialIconsExtended)
                 implementation(libs.kotlin.test)
+            }
+        }
+        jvmMain {
+            dependencies {
+                implementation(libs.ktor.engine.java)
+            }
+        }
+        androidMain {
+            dependencies {
+                implementation(libs.ktor.engine.android)
+            }
+        }
+        iosMain {
+            dependencies {
+                implementation(libs.ktor.engine.darwin)
             }
         }
         getByName("jvmBenchmark") {
