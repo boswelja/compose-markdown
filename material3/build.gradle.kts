@@ -47,9 +47,21 @@ kotlin {
     jvmToolchain(21)
     explicitApi()
 
+    withSourcesJar(publish = true)
+
+    // JVM targets
+    jvm()
+
+    // Android targets
     androidTarget {
         publishLibraryVariants("release")
     }
+
+    // Apple targets
+    iosArm64()
+
+    // Web targets
+    wasmJs()
 
     sourceSets {
         commonMain {
