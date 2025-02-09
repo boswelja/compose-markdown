@@ -1,12 +1,12 @@
 [versions]
-android-gradle-plugin = "8.7.3"
+android-gradle-plugin = "8.8.0"
 detekt = "1.23.7"
 kotlin = "2.1.10"
 dokka = "2.0.0"
 
 compose = "1.7.3"
 
-coil = "3.0.4"
+coil = "3.1.0"
 ktor = "3.0.3"
 
 intellij-markdown = "0.7.3"
@@ -17,7 +17,6 @@ kotlinx-benchmark = "0.4.13"
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-gif = { module = "io.coil-kt.coil3:coil-gif", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }
-coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 ktor-engine-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 ktor-engine-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
