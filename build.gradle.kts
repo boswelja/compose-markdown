@@ -10,3 +10,8 @@ plugins {
 
     alias(libs.plugins.dokka)
 }
+
+dependencies {
+    dokka(projects.core)
+    dokka(projects.material3)
+}
