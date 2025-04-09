@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import java.net.URI
 
 plugins {
@@ -56,8 +57,11 @@ kotlin {
 
     // Apple targets
     iosArm64()
+    iosSimulatorArm64()
+    iosX64()
 
     // Web targets
+    @OptIn(ExperimentalWasmDsl::class)
     wasmJs()
 
     sourceSets {
