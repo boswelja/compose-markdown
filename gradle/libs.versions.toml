@@ -1,5 +1,5 @@
 [versions]
-android-gradle-plugin = "8.8.0"
+android-gradle-plugin = "8.9.1"
 detekt = "1.23.8"
 kotlin = "2.1.20"
 dokka = "2.0.0"
