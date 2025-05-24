@@ -28,7 +28,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("com.android.settings") version("8.8.0")
+    id("com.android.settings") version("8.10.0")
 }
 
 rootProject.name = "compose-markdown"
@@ -42,7 +42,7 @@ include(
 )
 
 android {
-    buildToolsVersion = "35.0.0"
-    compileSdk = 35
-    minSdk = 28
+    buildToolsVersion = "36.0.0"
+    compileSdk = 36
+    minSdk = 23
 }
