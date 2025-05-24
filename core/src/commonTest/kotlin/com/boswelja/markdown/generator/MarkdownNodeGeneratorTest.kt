@@ -436,7 +436,7 @@ class MarkdownNodeGeneratorTest {
         }
     }
 
-    @Ignore("There is an issue with the underlying parser that prevents table alignments from being parsed, so tests fail")
+    @Ignore // There is an issue with the underlying parser that prevents table alignments from being parsed, so tests fail
     @Test
     fun `table parsing`() {
         TABLE_PATTERNS.forEach { (markdown, expected) ->
