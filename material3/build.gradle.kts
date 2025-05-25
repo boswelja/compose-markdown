@@ -13,9 +13,6 @@ plugins {
     id("com.boswelja.publish")
 }
 
-group = findProperty("group")!!
-version = findProperty("version")!!
-
 android {
     namespace = "com.boswelja.markdown.material3"
 
