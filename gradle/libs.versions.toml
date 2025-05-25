@@ -25,6 +25,9 @@ intellij-markdown = { module = "org.jetbrains:markdown", version.ref = "intellij
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }
 kotlinx-benchmark = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime", version.ref = "kotlinx-benchmark"}
 
+android-libraryGradlePlugin = { module = "com.android.library:com.android.library.gradle.plugin", version.ref = "android-gradle-plugin" }
+kotlin-multiplatformGradlePlugin = { module = "org.jetbrains.kotlin.multiplatform:org.jetbrains.kotlin.multiplatform.gradle.plugin", version.ref = "kotlin" }
+
 [plugins]
 android-application = { id = "com.android.application" }
 android-library = { id = "com.android.library" }

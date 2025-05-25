@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
     id("com.vanniktech.maven.publish")
@@ -14,32 +15,22 @@ val extension = project.extensions.create<CustomPublishingExtension>("publish")
 group = findProperty("group")!!
 version = findProperty("version")!!
 
-//signing {
-//    val signingKey: String? by project
-//    val signingPassword: String? by project
-//    useInMemoryPgpKeys(signingKey, signingPassword)
-//    sign(publishing.publications)
-//}
-
 afterEvaluate {
     publishing {
         repositories {
-            if (System.getenv("PUBLISHING") == "true") {
-                maven("https://maven.pkg.github.com/boswelja/compose-markdown") {
-                    val githubUsername: String? by project.properties
-                    val githubToken: String? by project.properties
-                    name = "github"
-                    credentials {
-                        username = githubUsername
-                        password = githubToken
-                    }
-                }
+            maven("https://maven.pkg.github.com/boswelja/compose-markdown") {
+                name = "github"
+                credentials(PasswordCredentials::class)
             }
         }
     }
 
     mavenPublishing {
         coordinates(group as String, name, version as String)
+
+        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+        signAllPublications()
+
         pom {
             name = project.name
             description = extension.description
