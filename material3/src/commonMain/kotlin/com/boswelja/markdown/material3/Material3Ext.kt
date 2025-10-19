@@ -2,6 +2,7 @@
 package com.boswelja.markdown.material3
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -108,7 +109,7 @@ public fun m3CodeBlockStyle(
 public fun m3RuleStyle(
     color: Color = MaterialTheme.colorScheme.outlineVariant,
     shape: Shape = RectangleShape,
-    thickness: Dp = Dp.Hairline
+    thickness: Dp = DividerDefaults.Thickness
 ): RuleStyle {
     return RuleStyle(
         color = color,
