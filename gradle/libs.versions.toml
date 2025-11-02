@@ -4,6 +4,7 @@ detekt = "1.23.8"
 kotlin = "2.3.0"
 dokka = "2.1.0"
 
+androidx-compose = "1.10.2"
 compose = "1.10.0"
 
 coil = "3.3.0"
@@ -14,6 +15,9 @@ intellij-markdown = "0.7.3"
 kotlinx-benchmark = "0.4.14"
 
 [libraries]
+androidx-compose-ui-test-junit4-android = { module = "androidx.compose.ui:ui-test-junit4-android", version.ref = "androidx-compose"}
+androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-compose"}
+
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-gif = { module = "io.coil-kt.coil3:coil-gif", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }
