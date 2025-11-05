@@ -88,8 +88,8 @@ public fun MarkdownDocument(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
-    linkInteractionListener: LinkInteractionListener? = null,
     modifier: Modifier = Modifier,
+    linkInteractionListener: LinkInteractionListener? = null,
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
 ) {
     val parsedMarkdownNodes = remember(markdown) {
