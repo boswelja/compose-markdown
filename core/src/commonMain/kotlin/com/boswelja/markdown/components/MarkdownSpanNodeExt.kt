@@ -88,11 +88,9 @@ internal fun MarkdownSpanNode.toAnnotatedString(
             text = text,
             spanStyle = textStyleModifiers.code(textStyle).toSpanStyle()
         )
-
         is MarkdownImage -> buildAnnotatedString {
             appendInlineContent(imageUrl, contentDescription)
         }
-
         is MarkdownLink -> buildAnnotatedString {
             withLink(
                 LinkAnnotation.Url(
@@ -122,7 +120,6 @@ internal fun MarkdownSpanNode.toAnnotatedString(
                 .maybeLet(isStrikethrough, textStyleModifiers.strikethrough)
                 .toSpanStyle()
         )
-
         MarkdownWhitespace -> AnnotatedString(" ", textStyle.toSpanStyle())
         MarkdownEol -> AnnotatedString("\n", textStyle.toSpanStyle())
     }
