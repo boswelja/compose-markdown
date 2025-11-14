@@ -4,6 +4,7 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.LinkInteractionListener
 import androidx.compose.ui.unit.sp
 import com.boswelja.markdown.generator.MarkdownHeading
 import com.boswelja.markdown.style.TextStyleModifiers
@@ -19,6 +20,7 @@ internal fun MarkdownHeading(
     heading: MarkdownHeading,
     textStyles: TextStyles,
     textStyleModifiers: TextStyleModifiers,
+    linkInteractionListener: LinkInteractionListener?,
     modifier: Modifier = Modifier
 ) {
     val (annotatedString, inlineContent) = remember(heading, textStyles) {
@@ -30,7 +32,12 @@ internal fun MarkdownHeading(
             MarkdownHeading.Size.Headline5 -> textStyles.headline5
             MarkdownHeading.Size.Headline6 -> textStyles.headline6
         }
-        heading.children.buildTextWithContent(textStyle, textStyleModifiers, TextUnitSize(100.sp, 100.sp))
+        heading.children.buildTextWithContent(
+            textStyle,
+            textStyleModifiers,
+            TextUnitSize(100.sp, 100.sp),
+            linkInteractionListener
+        )
     }
     BasicText(
         text = annotatedString,

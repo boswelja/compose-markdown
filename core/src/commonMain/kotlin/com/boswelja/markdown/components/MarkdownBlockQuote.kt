@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.LinkInteractionListener
 import com.boswelja.markdown.MarkdownNode
 import com.boswelja.markdown.generator.MarkdownBlockQuote
 import com.boswelja.markdown.style.BlockQuoteStyle
@@ -36,7 +36,7 @@ internal fun MarkdownBlockQuote(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
-    onLinkClick: (LinkAnnotation) -> Unit,
+    linkInteractionListener: LinkInteractionListener?,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -68,7 +68,7 @@ internal fun MarkdownBlockQuote(
                         codeBlockStyle = codeBlockStyle,
                         ruleStyle = ruleStyle,
                         tableStyle = tableStyle,
-                        onLinkClick = onLinkClick
+                        linkInteractionListener = linkInteractionListener
                     )
                 }
             }

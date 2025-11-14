@@ -1,14 +1,10 @@
 package com.boswelja.markdown.components
 
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.text.LinkAnnotation
-import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.LinkInteractionListener
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
 import com.boswelja.markdown.generator.MarkdownParagraph
@@ -24,31 +20,21 @@ internal fun MarkdownParagraph(
     paragraph: MarkdownParagraph,
     textStyle: TextStyle,
     textStyleModifiers: TextStyleModifiers,
-    onLinkClick: (LinkAnnotation) -> Unit,
+    linkInteractionListener: LinkInteractionListener?,
     modifier: Modifier = Modifier,
 ) {
     val (annotatedString, inlineContent) = remember(paragraph) {
-        paragraph.children.buildTextWithContent(textStyle, textStyleModifiers, TextUnitSize(100.sp, 100.sp))
+        paragraph.children.buildTextWithContent(
+            textStyle,
+            textStyleModifiers,
+            TextUnitSize(100.sp, 100.sp),
+            linkInteractionListener
+        )
     }
-    val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
-    val pressIndicator = Modifier.pointerInput(onLinkClick, annotatedString) {
-        detectTapGestures { pos ->
-            layoutResult.value?.let { layoutResult ->
-                val offset = layoutResult.getOffsetForPosition(pos)
-                annotatedString.getLinkAnnotations(start = offset, end = offset)
-                    .firstOrNull()
-                    ?.let { annotation ->
-                        annotation.item.linkInteractionListener?.onClick(annotation.item)
-                    }
-            }
-        }
-    }
+
     BasicText(
         text = annotatedString,
-        modifier = modifier.then(pressIndicator),
-        inlineContent = inlineContent,
-        onTextLayout = {
-            layoutResult.value = it
-        }
+        modifier = modifier,
+        inlineContent = inlineContent
     )
 }
