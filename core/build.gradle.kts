@@ -1,4 +1,6 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import java.net.URI
 
 plugins {
@@ -17,6 +19,10 @@ plugins {
 
 android {
     namespace = "com.boswelja.markdown"
+
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 
     buildTypes {
         release {
@@ -57,6 +63,9 @@ kotlin {
     // Android targets
     androidTarget {
         publishLibraryVariants("release")
+
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        instrumentedTestVariant.sourceSetTree = KotlinSourceSetTree.test
     }
 
     // Apple targets
@@ -84,11 +93,19 @@ kotlin {
                 // Since MenuItems require icons, we need to import some to test with
                 implementation(compose.materialIconsExtended)
                 implementation(libs.kotlin.test)
+
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.uiTest)
             }
         }
         jvmMain {
             dependencies {
                 implementation(libs.ktor.engine.java)
+            }
+        }
+        getByName("jvmTest") {
+            dependencies {
+                implementation(compose.desktop.currentOs)
             }
         }
         androidMain {
@@ -108,6 +125,12 @@ kotlin {
             }
         }
     }
+}
+
+// For Android instrumentation tests
+dependencies {
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4.android)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
 
 benchmark {
