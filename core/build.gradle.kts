@@ -132,6 +132,12 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4.android)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
+// Prevent CMP tests from being run as part of Android unit tests
+android.testOptions {
+    unitTests.all {
+        it.exclude("**/components/**")
+    }
+}
 
 benchmark {
     targets {
