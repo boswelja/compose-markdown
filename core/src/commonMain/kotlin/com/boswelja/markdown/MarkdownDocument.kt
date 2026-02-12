@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.LinkInteractionListener
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -43,6 +44,10 @@ import org.intellij.markdown.parser.MarkdownParser
  * Displays a Markdown document.
  */
 @Composable
+@Deprecated(
+    message = "Use the overload which takes a LinkInteractionListener",
+    level = DeprecationLevel.HIDDEN
+)
 public fun MarkdownDocument(
     markdown: String,
     textStyles: TextStyles,
@@ -53,6 +58,38 @@ public fun MarkdownDocument(
     tableStyle: TableStyle,
     onLinkClick: (LinkAnnotation) -> Unit,
     modifier: Modifier = Modifier,
+    sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
+) {
+    MarkdownDocument(
+        markdown = markdown,
+        textStyles = textStyles,
+        textStyleModifiers = textStyleModifiers,
+        blockQuoteStyle = blockQuoteStyle,
+        codeBlockStyle = codeBlockStyle,
+        ruleStyle = ruleStyle,
+        tableStyle = tableStyle,
+        linkInteractionListener = {
+            onLinkClick(it)
+        },
+        modifier = modifier,
+        sectionSpacing = sectionSpacing
+    )
+}
+
+/**
+ * Displays a Markdown document.
+ */
+@Composable
+public fun MarkdownDocument(
+    markdown: String,
+    textStyles: TextStyles,
+    textStyleModifiers: TextStyleModifiers,
+    blockQuoteStyle: BlockQuoteStyle,
+    codeBlockStyle: CodeBlockStyle,
+    ruleStyle: RuleStyle,
+    tableStyle: TableStyle,
+    modifier: Modifier = Modifier,
+    linkInteractionListener: LinkInteractionListener? = null,
     sectionSpacing: Dp = textStyles.textStyle.fontSize.toDp()
 ) {
     val parsedMarkdownNodes = remember(markdown) {
@@ -73,7 +110,7 @@ public fun MarkdownDocument(
                 codeBlockStyle = codeBlockStyle,
                 ruleStyle = ruleStyle,
                 tableStyle = tableStyle,
-                onLinkClick = onLinkClick,
+                linkInteractionListener = linkInteractionListener,
             )
         }
     }
@@ -95,7 +132,7 @@ internal fun MarkdownNode(
     codeBlockStyle: CodeBlockStyle,
     ruleStyle: RuleStyle,
     tableStyle: TableStyle,
-    onLinkClick: (LinkAnnotation) -> Unit,
+    linkInteractionListener: LinkInteractionListener?,
     modifier: Modifier = Modifier
 ) {
     when (node) {
@@ -107,21 +144,25 @@ internal fun MarkdownNode(
             codeBlockStyle = codeBlockStyle,
             ruleStyle = ruleStyle,
             tableStyle = tableStyle,
-            onLinkClick = onLinkClick,
+            linkInteractionListener = linkInteractionListener,
             modifier = modifier,
         )
+
         is MarkdownCodeBlock -> MarkdownCodeBlock(
             codeBlock = node,
             style = codeBlockStyle,
             textStyle = textStyles.textStyle.copy(fontFamily = FontFamily.Monospace),
             modifier = modifier,
         )
+
         is MarkdownHeading -> MarkdownHeading(
             heading = node,
             modifier = modifier,
             textStyles = textStyles,
             textStyleModifiers = textStyleModifiers,
+            linkInteractionListener = linkInteractionListener
         )
+
         is MarkdownOrderedList -> MarkdownOrderedList(
             list = node,
             textStyles = textStyles,
@@ -130,34 +171,39 @@ internal fun MarkdownNode(
             codeBlockStyle = codeBlockStyle,
             ruleStyle = ruleStyle,
             tableStyle = tableStyle,
-            onLinkClick = onLinkClick,
+            linkInteractionListener = linkInteractionListener,
             modifier = modifier
         )
+
         is MarkdownParagraph -> MarkdownParagraph(
             paragraph = node,
             textStyle = textStyles.textStyle,
             textStyleModifiers = textStyleModifiers,
-            onLinkClick = onLinkClick,
+            linkInteractionListener = linkInteractionListener,
             modifier = modifier
         )
+
         MarkdownRule -> MarkdownRule(
             ruleStyle = ruleStyle,
             modifier = modifier
         )
+
         is MarkdownTable -> MarkdownTable(
             table = node,
             style = tableStyle,
             textStyle = textStyles.textStyle,
             textStyleModifiers = textStyleModifiers,
             ruleStyle = ruleStyle,
-            onLinkClick = onLinkClick,
+            linkInteractionListener = linkInteractionListener,
             modifier = modifier
         )
+
         is MarkdownHtmlBlock -> MarkdownHtmlBlock(
             htmlBlock = node,
             textStyle = textStyles.textStyle,
             modifier = modifier
         )
+
         is MarkdownUnorderedList -> MarkdownUnorderedList(
             list = node,
             textStyles = textStyles,
@@ -166,7 +212,7 @@ internal fun MarkdownNode(
             codeBlockStyle = codeBlockStyle,
             ruleStyle = ruleStyle,
             tableStyle = tableStyle,
-            onLinkClick = onLinkClick,
+            linkInteractionListener = linkInteractionListener,
             modifier = modifier
         )
     }

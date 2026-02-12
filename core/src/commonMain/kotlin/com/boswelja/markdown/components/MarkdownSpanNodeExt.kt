@@ -6,6 +6,7 @@ import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.LinkInteractionListener
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.TextStyle
@@ -34,6 +35,7 @@ internal fun List<MarkdownSpanNode>.buildTextWithContent(
     textStyles: TextStyle,
     textStyleModifiers: TextStyleModifiers,
     imageSize: TextUnitSize,
+    linkInteractionListener: LinkInteractionListener?
 ): TextWithContent {
     val content = mutableMapOf<String, InlineTextContent>()
     val text = buildAnnotatedString {
@@ -41,7 +43,11 @@ internal fun List<MarkdownSpanNode>.buildTextWithContent(
             if (node is MarkdownImage) {
                 content[node.imageUrl] = InlineTextContent(
                     // TODO auto-size the content - https://issuetracker.google.com/issues/294110693
-                    placeholder = Placeholder(imageSize.width, imageSize.height, PlaceholderVerticalAlign.TextBottom)
+                    placeholder = Placeholder(
+                        imageSize.width,
+                        imageSize.height,
+                        PlaceholderVerticalAlign.TextBottom
+                    )
                 ) { contentDescription ->
                     AsyncImage(
                         model = ImageRequest.Builder(LocalPlatformContext.current)
@@ -54,7 +60,7 @@ internal fun List<MarkdownSpanNode>.buildTextWithContent(
                     )
                 }
             }
-            append(node.toAnnotatedString(textStyles,textStyleModifiers))
+            append(node.toAnnotatedString(textStyles, textStyleModifiers, linkInteractionListener))
         }
     }
     return TextWithContent(text, content)
@@ -75,6 +81,7 @@ internal data class TextWithContent(
 internal fun MarkdownSpanNode.toAnnotatedString(
     textStyle: TextStyle,
     textStyleModifiers: TextStyleModifiers,
+    linkInteractionListener: LinkInteractionListener?
 ): AnnotatedString {
     return when (this) {
         is MarkdownCodeSpan -> AnnotatedString(
@@ -85,14 +92,26 @@ internal fun MarkdownSpanNode.toAnnotatedString(
             appendInlineContent(imageUrl, contentDescription)
         }
         is MarkdownLink -> buildAnnotatedString {
-            withLink(LinkAnnotation.Url(url)) {
+            withLink(
+                LinkAnnotation.Url(
+                    url = url,
+                    linkInteractionListener = linkInteractionListener
+                )
+            ) {
                 withStyle(textStyleModifiers.link(textStyle).toSpanStyle()) {
                     displayText.forEach {
-                        append(it.toAnnotatedString(textStyle, textStyleModifiers))
+                        append(
+                            it.toAnnotatedString(
+                                textStyle,
+                                textStyleModifiers,
+                                linkInteractionListener
+                            )
+                        )
                     }
                 }
             }
         }
+
         is MarkdownText -> AnnotatedString(
             text = this.text,
             spanStyle = textStyle
