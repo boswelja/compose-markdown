@@ -10,7 +10,7 @@ compose = "1.11.1"
 coil = "3.5.0"
 ktor = "3.5.1"
 
-intellij-markdown = "0.7.5"
+intellij-markdown = "0.7.9"
 
 kotlinx-benchmark = "0.4.17"
 
