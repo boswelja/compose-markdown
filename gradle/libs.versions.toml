@@ -12,7 +12,7 @@ ktor = "3.5.2"
 
 intellij-markdown = "0.7.5"
 
-kotlinx-benchmark = "0.4.17"
+kotlinx-benchmark = "0.5.0"
 
 [libraries]
 androidx-compose-ui-test-junit4-android = { module = "androidx.compose.ui:ui-test-junit4-android", version.ref = "androidx-compose"}
